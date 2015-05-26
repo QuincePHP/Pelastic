@@ -1,6 +1,6 @@
 <?php namespace Quince\Pelastic\Contracts;
 
-interface ArrayableInterface {
+interface ArrayableInterface extends \ArrayAccess {
 
     /**
      * An array representation of object
