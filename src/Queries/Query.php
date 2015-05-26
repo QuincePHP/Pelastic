@@ -1,6 +1,7 @@
 <?php namespace Quince\Pelastic\Queries;
 
 use Quince\Plastic\Contracts\Queries\AccessorMutatorInterface;
+use Quince\Plastic\Exceptions\PlasticLogicException;
 
 abstract class Query implements AccessorMutatorInterface {
 
@@ -13,9 +14,10 @@ abstract class Query implements AccessorMutatorInterface {
      * Gets the attribute from options array
      *
      * @param $attributeName
-     * @param null $defaultValue
      * @param bool $hardCheck
-     * @return null
+     * @param null $defaultValue
+     * @return null|string
+     * @throws PlasticLogicException
      */
     public function getAttribute($attributeName, $hardCheck = false, $defaultValue = null)
     {
@@ -55,5 +57,27 @@ abstract class Query implements AccessorMutatorInterface {
     protected function getOptionAttribute()
     {
         return $this->optionAttribute;
+    }
+
+    /**
+     * Sets boost value on query
+     *
+     * @param double $boostValue
+     * @return $this
+     */
+    public function setBoost($boostValue)
+    {
+        $this->setAttribute('boost', (double) $boostValue);
+        return $this;
+    }
+
+    /**
+     * Get boost attribute
+     *
+     * @return null|string
+     */
+    public function getBoost()
+    {
+        return $this->getAttribute('boost', false, null);
     }
 }
