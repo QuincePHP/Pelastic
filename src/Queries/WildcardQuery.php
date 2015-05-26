@@ -133,4 +133,68 @@ class WildcardQuery extends Query implements WildcardQueryInterface, BoostableIn
         return (string) $first . '*' . (string) $second;
     }
 
+    /**
+     * Match only with single character in both sides of an string
+     *
+     * @param $string
+     * @return string
+     */
+    public function wrapSingleAroundString($string)
+    {
+        return '?' . (string) $string . '?';
+    }
+
+    /**
+     * Only match single for end of the string
+     *
+     * @param $string
+     * @return string
+     */
+    public function endSingleMatchForString($string)
+    {
+        return ($string) . '?';
+    }
+
+    /**
+     * Single char match from the beginning of the string
+     *
+     * @return string
+     */
+    public function beginSingleMatchForString($string)
+    {
+        return '?' . (string) $string;
+    }
+
+    /**
+     * match any single for end of the string
+     *
+     * @param $string
+     * @return string
+     */
+    public function wrapAnyAroundString($string)
+    {
+        return '*' . (string) $string . '*';
+    }
+
+    /**
+     * any char match from the beginning of the string
+     *
+     * @param $string
+     * @return string
+     */
+    public function beingAnyMatchForString($string)
+    {
+        return '*' . (string) $string;
+    }
+
+    /**
+     * any char match from the end of the string
+     *
+     * @param $string
+     * @return string
+     */
+    public function endAnyMatchForString($string)
+    {
+        return (string) $string . '*';
+    }
 }
