@@ -2,23 +2,23 @@
 
 interface AccessorMutatorInterface {
 
-    /**
-     * Get attribute
-     *
-     * @param $attributeName
-     * @param bool $hardCheck
-     * @param null $defaultValue
-     * @return mixed
-     */
-    public function getAttribute($attributeName, $hardCheck = false, $defaultValue = null);
+	/**
+	 * Get attribute
+	 *
+	 * @param string $attributeName
+	 * @param bool   $hardCheck
+	 * @param null   $defaultValue
+	 * @return mixed
+	 */
+	public function getAttribute($attributeName, $hardCheck = false, $defaultValue = null);
 
-    /**
-     * Set attribute
-     *
-     * @param $attributeName
-     * @param $attributeValue
-     * @return $this
-     */
-    public function setAttribute($attributeName, $attributeValue);
+	/**
+	 * Set attribute
+	 *
+	 * @param string $attributeName
+	 * @param mixed  $attributeValue
+	 * @return self
+	 */
+	public function setAttribute($attributeName, $attributeValue);
 
 }

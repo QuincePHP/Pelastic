@@ -11,84 +11,86 @@ use Quince\Pelastic\Contracts\Queries\TermQueryInterface;
  */
 class TermQuery extends Query implements TermQueryInterface, ArrayableInterface {
 
-    /**
-     * @param $field
-     * @param $value
-     * @param null $boost
-     */
-    public function __construct($field, $value, $boost = null)
-    {
-        $this->setField($field)->setValue($value);
+	/**
+	 * @param mixed $field
+	 * @param mixed $value
+	 * @param mixed $boost
+	 */
+	public function __construct($field, $value, $boost = null)
+	{
+		$this->setField($field)->setValue($value);
 
-        if ($boost !== null) {
+		if ($boost !== null) {
 
-            $this->setBoost($boost);
+			$this->setBoost($boost);
 
-        }
-    }
+		}
+	}
 
-    /**
-     * Set field to exact match a value inside that
-     *
-     * @param string $field
-     * @return TermQueryInterface
-     */
-    public function setField($field)
-    {
-        $this->setAttribute('field', $field);
-        return $this;
-    }
+	/**
+	 * Set field to exact match a value inside that
+	 *
+	 * @param string $field
+	 * @return TermQueryInterface
+	 */
+	public function setField($field)
+	{
+		$this->setAttribute('field', $field);
 
-    /**
-     * Set value to exact match against the field values
-     *
-     * @param string $value
-     * @return TermQueryInterface
-     */
-    public function setValue($value)
-    {
-        $this->setAttribute('value', $value);
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * An array representation of class
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        $field = $this->getAttribute('field', true);
+	/**
+	 * Set value to exact match against the field values
+	 *
+	 * @param string $value
+	 * @return TermQueryInterface
+	 */
+	public function setValue($value)
+	{
+		$this->setAttribute('value', $value);
 
-        $value = $this->getAttribute('value', true);
+		return $this;
+	}
 
-        $boost = $this->getAttribute('boost', false, null);
+	/**
+	 * An array representation of class
+	 *
+	 * @return array
+	 */
+	public function toArray()
+	{
+		$field = $this->getAttribute('field', true);
 
-        $query = [
-            'term' => [
-                 $field => [
-                    'value' => $value
-                ]
-            ]
-        ];
+		$value = $this->getAttribute('value', true);
 
-        if ($boost !== null) {
+		$boost = $this->getAttribute('boost', false, null);
 
-            $query['term'][$field]['boost'] = (double) $boost;
+		$query = [
+			'term' => [
+				$field => [
+					'value' => $value
+				]
+			]
+		];
 
-        }
+		if ($boost !== null) {
 
-        return $query;
-    }
+			$query['term'][$field]['boost'] = (double) $boost;
 
-    /**
-     * Set boost value for the query
-     *
-     * @param $boostValue
-     * @return TermQueryInterface
-     */
-    public function setBoost($boostValue)
-    {
-        return $this->setAttribute('boost', $boostValue);
-    }
+		}
+
+		return $query;
+	}
+
+	/**
+	 * Set boost value for the query
+	 *
+	 * @param $boostValue
+	 * @return TermQueryInterface
+	 */
+	public function setBoost($boostValue)
+	{
+		return $this->setAttribute('boost', $boostValue);
+	}
 }
