@@ -46,7 +46,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
 
         $fields = ['should', 'must', 'must_not'];
 
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
 
             $queries = $this->getAttribute($field, false, []);
 
@@ -77,6 +77,10 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
         $minShMatch = $this->getAttribute('minimum_should_match', false, null);
 
         if ($minShMatch !== null) $query['bool']['minimum_should_match'] = $minShMatch;
+
+        $coord = $this->getAttribute('coord', false, null);
+
+        if($coord !== null) $query['bool']['disable_coord'] = !(bool) $coord;
 
         return $query;
     }
