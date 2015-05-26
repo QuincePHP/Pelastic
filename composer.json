@@ -1,0 +1,32 @@
+{
+	"name": "quince/pelastic",
+	"description": "An explicit abstraction layer on elasticsearch query DSL",
+	"type": "library",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Behzad Shabani",
+			"email": "behzad.shabani@gmail.com",
+			"homepage": "https://github.com/behzadsh"
+		},
+		{
+			"name": "Reza Shadman",
+			"email": "pcfeeler@gmail.com",
+			"homepage": "https://github.com/reshadman"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Quince\\Pelastic\\": "src/"
+		}
+	},
+	"require": {
+		"guzzle/guzzle": "~3.9"
+	},
+	"require-dev": {
+		"codeception/codeception": "~2.0",
+		"phpunit/phpunit": "~4.6",
+		"mockery/mockery": "1.0.*@dev"
+	},
+	"minimum-stability": "stable"
+}
