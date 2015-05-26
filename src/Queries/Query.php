@@ -1,8 +1,8 @@
 <?php namespace Quince\Pelastic\Queries;
 
-use Quince\Exceptions\PlasticLogicException;
+use Quince\Plastic\Contracts\Queries\AccessorMutatorInterface;
 
-abstract class Query {
+abstract class Query implements AccessorMutatorInterface {
 
     /**
      * @var array
@@ -41,7 +41,7 @@ abstract class Query {
      * @param $value
      * @return $this
      */
-    protected function setAttribute($attributeName, $value)
+    public function setAttribute($attributeName, $value)
     {
         $this->optionAttribute[$attributeName] = $value;
         return $this;

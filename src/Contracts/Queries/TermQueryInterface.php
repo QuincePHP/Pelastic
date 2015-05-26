@@ -1,4 +1,4 @@
-<?php namespace Quince\Pelastic\Queries;
+<?php namespace Quince\Pelastic\Contracts\Queries;
 
 interface TermQueryInterface {
 

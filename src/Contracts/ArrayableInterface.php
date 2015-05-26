@@ -1,4 +1,4 @@
-<?php namespace Quince\Pelastic;
+<?php namespace Quince\Pelastic\Contracts;
 
 interface ArrayableInterface {
 

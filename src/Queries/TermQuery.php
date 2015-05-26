@@ -1,5 +1,7 @@
 <?php namespace Quince\Pelastic\Queries;
-use Quince\Pelastic\ArrayableInterface;
+
+use Quince\Pelastic\Contracts\ArrayableInterface;
+use Quince\Pelastic\Contracts\Queries\TermQueryInterface;
 
 /**
  * Class TermQuery
