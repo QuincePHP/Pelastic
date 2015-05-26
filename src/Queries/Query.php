@@ -47,6 +47,7 @@ abstract class Query implements AccessorMutatorInterface {
     public function setAttribute($attributeName, $value)
     {
         $this->optionAttribute[$attributeName] = $value;
+
         return $this;
     }
 

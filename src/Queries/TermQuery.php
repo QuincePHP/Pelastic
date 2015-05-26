@@ -95,4 +95,5 @@ class TermQuery extends Query implements TermQueryInterface, ArrayableInterface 
 
         return $query;
     }
+    
 }
