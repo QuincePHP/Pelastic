@@ -1,5 +1,6 @@
 <?php namespace Quince\Pelastic\Queries;
 
+use Quince\Exceptions\PlasticInvalidArgumentException;
 use Quince\Plastic\Contracts\Queries\AccessorMutatorInterface;
 use Quince\Plastic\Exceptions\PlasticLogicException;
 
@@ -60,15 +61,21 @@ abstract class Query implements AccessorMutatorInterface {
     }
 
     /**
-     * Sets boost value on query
+     * Set boost value for the query
      *
-     * @param double $boostValue
+     * @param $boostValue
      * @return $this
+     * @throws PlasticInvalidArgumentException
      */
     public function setBoost($boostValue)
     {
-        $this->setAttribute('boost', (double) $boostValue);
-        return $this;
+        if (!is_numeric($boostValue)) {
+
+            throw new PlasticInvalidArgumentException("The boost value should be numeric.");
+
+        }
+
+        return $this->setAttribute('boost', (double) $boostValue);
     }
 
     /**
