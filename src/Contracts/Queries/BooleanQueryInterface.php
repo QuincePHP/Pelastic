@@ -105,4 +105,34 @@ interface BooleanQueryInterface extends QueryInterface {
      * @return $this
      */
     public function iReallyNeed(QueryInterface $query);
+
+    /**
+     * Add minimum should match functionality
+     *
+     * @param $value
+     * @return $this
+     */
+    public function withMinimumShouldMatch($value);
+
+    /**
+     * A proxy to set minimum should match
+     *
+     * @param $value
+     * @return $this
+     */
+    public function setMinimumShouldMatch($value);
+
+    /**
+     * See document on elasticsearch
+     *
+     * @return $this
+     */
+    public function enableCoord();
+
+    /**
+     * See document on elasticsearch
+     *
+     * @return $this
+     */
+    public function disableCoord();
 }
