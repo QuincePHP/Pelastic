@@ -1,6 +1,6 @@
 <?php namespace Quince\Pelastic\Contracts\Queries;
 
-interface TermQueryInterface {
+interface TermQueryInterface extends QueryInterface {
 
     /**
      * Set field to exact match a value inside that

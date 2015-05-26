@@ -1,6 +1,6 @@
 <?php namespace Quince\Pelastic\Contracts\Queries;
 
-interface WildcardQueryInterface {
+interface WildcardQueryInterface extends QueryInterface {
 
     /**
      * Set field to apply wildcard query

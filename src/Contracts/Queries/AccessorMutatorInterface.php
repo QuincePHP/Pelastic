@@ -1,4 +1,4 @@
-<?php namespace Quince\Plastic\Contracts\Queries;
+<?php namespace Quince\Pelastic\Contracts\Queries;
 
 interface AccessorMutatorInterface {
 

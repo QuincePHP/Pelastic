@@ -2,7 +2,7 @@
 
 use Quince\Pelastic\Queries\TermsQuery;
 
-interface TermsQueryInterface {
+interface TermsQueryInterface extends QueryInterface {
 
     /**
      * Sets field to search on
