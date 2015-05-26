@@ -1,7 +1,8 @@
 <?php namespace Quince\Pelastic\Queries;
 
 use Quince\Exceptions\PlasticInvalidArgumentException;
-use Quince\Plastic\Contracts\Queries\AccessorMutatorInterface;
+use Quince\Pelastic\Contracts\Queries\AccessorMutatorInterface;
+use Quince\Pelastic\Contracts\Queries\QueryInterface;
 use Quince\Plastic\Exceptions\PlasticLogicException;
 
 abstract class Query implements AccessorMutatorInterface {
@@ -87,5 +88,46 @@ abstract class Query implements AccessorMutatorInterface {
     public function getBoost()
     {
         return $this->getAttribute('boost', false, null);
+    }
+
+    /**
+     * Put an item into an array field
+     * if the array does not exists it will be created
+     * and the new value is pushed to it, other ways it will be added
+     * to the old one
+     *
+     * @param $field
+     * @param $what
+     * @return array
+     */
+    protected function putIntoArrayField($field, $what)
+    {
+        try {
+
+            $collection = (array) $this->getAttribute($field, true);
+
+            $collection = array_push($collection, $what);
+
+            $this->setAttribute($field, $collection);
+
+        }catch (PlasticLogicException $e) {
+            // In case array has not been created yet
+            $this->setAttribute($field, $collection = [$what]);
+
+        }
+
+        return $collection;
+    }
+
+    /**
+     * Put a query interface instance into array fields
+     *
+     * @param $field
+     * @param QueryInterface $query
+     * @return array
+     */
+    protected function putQueryIntoArrayField($field, QueryInterface $query)
+    {
+        return $this->putIntoArrayField($field, $query);
     }
 }
