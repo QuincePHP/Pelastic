@@ -60,4 +60,51 @@ interface WildcardQueryInterface extends QueryInterface {
      */
     public function createMultiAny($first = '', $second = '');
 
+    /**
+     * Match only with single character in both sides of an string
+     *
+     * @param $string
+     * @return string
+     */
+    public function wrapSingleAroundString($string);
+
+    /**
+     * Only match single for end of the string
+     *
+     * @param $string
+     * @return string
+     */
+    public function endSingleMatchForString($string);
+
+    /**
+     * Single char match from the beginning of the string
+     *
+     * @param $string
+     * @return string
+     */
+    public function beginSingleMatchForString($string);
+
+    /**
+     * match any single for end of the string
+     *
+     * @param $string
+     * @return string
+     */
+    public function wrapAnyAroundString($string);
+
+    /**
+     * any char match from the beginning of the string
+     *
+     * @param $string
+     * @return string
+     */
+    public function beingAnyMatchForString($string);
+
+    /**
+     * any char match from the end of the string
+     *
+     * @param $string
+     * @return string
+     */
+    public function endAnyMatchForString($string);
 }
