@@ -21,7 +21,7 @@
 		}
 	},
 	"require": {
-		"guzzle/guzzle": "~3.9"
+		"guzzle/guzzle": "~5.3"
 	},
 	"require-dev": {
 		"codeception/codeception": "~2.0",
