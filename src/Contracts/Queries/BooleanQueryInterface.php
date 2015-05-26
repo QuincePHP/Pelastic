@@ -98,4 +98,11 @@ interface BooleanQueryInterface extends QueryInterface {
      */
     public function iDontLike(QueryInterface $query);
 
+    /**
+     * A human readable proxy to must
+     *
+     * @param QueryInterface $query
+     * @return $this
+     */
+    public function iReallyNeed(QueryInterface $query);
 }
