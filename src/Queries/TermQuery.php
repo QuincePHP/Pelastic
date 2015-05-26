@@ -2,6 +2,7 @@
 
 use Quince\Pelastic\Contracts\ArrayableInterface;
 use Quince\Pelastic\Contracts\Queries\TermQueryInterface;
+use Quince\Plastic\Exceptions\PlasticLogicException;
 
 /**
  * Class TermQuery
@@ -62,8 +63,6 @@ class TermQuery extends Query implements TermQueryInterface, ArrayableInterface 
 
         $value = $this->getAttribute('value', true);
 
-        $boost = $this->getAttribute('boost', false, null);
-
         $query = [
             'term' => [
                  $field => [
@@ -72,23 +71,28 @@ class TermQuery extends Query implements TermQueryInterface, ArrayableInterface 
             ]
         ];
 
+        return $this->addBoosToQuery($query);
+    }
+
+    /**
+     * Add boost to the query array
+     *
+     * @param array $query
+     * @return array
+     * @throws PlasticLogicException
+     */
+    protected function addBoosToQuery(array $query)
+    {
+        $boost = $this->getAttribute('boost', false, null);
+
+        $field = $this->getAttribute('field', true);
+
         if ($boost !== null) {
 
-            $query['term'][$field]['boost'] = (double) $boost;
+            $query['term'][$field]['boost'] = $boost;
 
         }
 
         return $query;
-    }
-
-    /**
-     * Set boost value for the query
-     *
-     * @param $boostValue
-     * @return TermQueryInterface
-     */
-    public function setBoost($boostValue)
-    {
-        return $this->setAttribute('boost', $boostValue);
     }
 }
