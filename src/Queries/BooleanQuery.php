@@ -3,10 +3,11 @@
 use Quince\Exceptions\PlasticInvalidArgumentException;
 use Quince\Pelastic\Contracts\ArrayableInterface;
 use Quince\Pelastic\Contracts\Queries\BooleanQueryInterface;
+use Quince\Pelastic\Contracts\Queries\BoostableInterface;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
 use Quince\Plastic\Exceptions\PlasticLogicException;
 
-class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInterface {
+class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInterface, BoostableInterface {
 
     /**
      * @param array $shoulds
@@ -68,6 +69,14 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
         }
 
         $this->checkQuery($query);
+
+        $query = ['bool' => $query];
+
+        if ($boost = $this->getBoost() !== null) $query['bool']['boost'] = $boost;
+
+        $minShMatch = $this->getAttribute('minimum_should_match', false, null);
+
+        if ($minShMatch !== null) $query['bool']['minimum_should_match'] = $minShMatch;
 
         return $query;
     }
@@ -257,5 +266,71 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
     public function iReallyNeed(QueryInterface $query)
     {
         return $this->must($query);
+    }
+
+    /**
+     * Add minimum should match functionality
+     *
+     * @param $value
+     * @return $this
+     */
+    public function withMinimumShouldMatch($value)
+    {
+        return $this->setMinimumShouldMatch($value);
+    }
+
+    /**
+     * A proxy to set minimum should match
+     *
+     * @param $value
+     * @return $this
+     */
+    public function setMinimumShouldMatch($value)
+    {
+        $this->validateMinimumShouldMatchValue($value);
+
+        $this->setAttribute('minimum_should_match', $value);
+
+        return $this;
+    }
+
+    /**
+     * Only validates minimum should match value and throws exception on failure
+     *
+     * @param $value
+     */
+    protected function validateMinimumShouldMatchValue($value)
+    {
+        if (is_integer($value)) return;
+
+        if (preg_match('/[0-9]?%/', $value)) return;
+
+        $pattern = '/[0-9]?(<|<=|>|>=|<-|>-)[0-9]?%/';
+
+        // FIXME add the full pattern
+    }
+
+    /**
+     * See document on elasticsearch
+     *
+     * @return $this
+     */
+    public function enableCoord()
+    {
+        $this->setAttribute('coord', true);
+
+        return $this;
+    }
+
+    /**
+     * See document on elasticsearch
+     *
+     * @return $this
+     */
+    public function disableCoord()
+    {
+        $this->setAttribute('coord', false);
+
+        return $this;
     }
 }
