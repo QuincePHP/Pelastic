@@ -10,8 +10,8 @@ class StaticQueryFactory implements StaticQueryFactoryInterface {
     /**
      * Creates the factory object of the given class with given arguments
      *
-     * @param $class
-     * @param array $args
+     * @param string $class
+     * @param array  $args
      * @return QueryInterface
      */
     public static function createFromClass($class, array $args = [])
@@ -22,8 +22,8 @@ class StaticQueryFactory implements StaticQueryFactoryInterface {
     /**
      * Creates factory objects from keywords
      *
-     * @param $what
-     * @param array $args
+     * @param string $what
+     * @param array  $args
      * @return QueryInterface
      */
     public static function create($what, array $args = [])
@@ -32,7 +32,7 @@ class StaticQueryFactory implements StaticQueryFactoryInterface {
 
             return static::createFromClass(static::getClassNameFromKeyword($what), $args);
 
-        } catch(PelasticInvalidArgumentException $e) {
+        } catch (PelasticInvalidArgumentException $e) {
 
             $eMessage = $e->getMessage();
 
@@ -46,7 +46,7 @@ class StaticQueryFactory implements StaticQueryFactoryInterface {
     /**
      * Create a class name from the given keyword
      *
-     * @param $keyword
+     * @param string $keyword
      * @return string
      */
     protected static function getClassNameFromKeyword($keyword)
@@ -59,8 +59,8 @@ class StaticQueryFactory implements StaticQueryFactoryInterface {
     /**
      * Creates class with reflection given some args
      *
-     * @param $class
-     * @param array $args
+     * @param string $class
+     * @param array  $args
      * @return object
      */
     protected static function makeClassByReflection($class, array $args)
@@ -74,14 +74,5 @@ class StaticQueryFactory implements StaticQueryFactoryInterface {
         }
 
         return $reflectionClass->newInstanceArgs($args);
-    }
-
-    /**
-     * @param $class
-     * @return QueryInterface
-     */
-    protected static function makeClass($class)
-    {
-        return new $class;
     }
 }

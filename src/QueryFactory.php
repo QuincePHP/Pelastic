@@ -8,8 +8,8 @@ class QueryFactory implements QueryFactoryInterface {
     /**
      * Creates the factory object of the given class with given arguments
      *
-     * @param $class
-     * @param array $args
+     * @param string $class
+     * @param array  $args
      * @return QueryInterface
      */
     public function createFromClass($class, array $args = [])
@@ -20,8 +20,8 @@ class QueryFactory implements QueryFactoryInterface {
     /**
      * Creates factory objects from keywords
      *
-     * @param $what
-     * @param array $args
+     * @param string $what
+     * @param array  $args
      * @return QueryInterface
      */
     public function create($what, array $args = [])
@@ -32,8 +32,8 @@ class QueryFactory implements QueryFactoryInterface {
     /**
      * Forward calls to the static factory
      *
-     * @param $method
-     * @param array $args
+     * @param string $method
+     * @param array  $args
      * @return QueryInterface
      */
     public function __call($method, array $args = [])
