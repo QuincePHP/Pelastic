@@ -1,9 +1,9 @@
 <?php namespace Quince\Pelastic;
 
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
-use Quince\Pelastic\Contracts\QueryFactorInterface;
+use Quince\Pelastic\Contracts\QueryFactoryInterface;
 
-class QueryFactory implements QueryFactorInterface {
+class QueryFactory implements QueryFactoryInterface {
 
     /**
      * Creates the factory object of the given class with given arguments

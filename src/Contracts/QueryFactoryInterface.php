@@ -2,7 +2,7 @@
 
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
 
-interface QueryFactorInterface {
+interface QueryFactoryInterface {
 
     /**
      * Creates the factory object of the given class with given arguments
