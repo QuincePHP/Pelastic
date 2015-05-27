@@ -1,13 +1,12 @@
 <?php namespace Quince\Pelastic\Queries;
 
 use Quince\Exceptions\PelasticInvalidArgumentException;
-use Quince\Pelastic\Contracts\ArrayableInterface;
 use Quince\Pelastic\Contracts\Queries\BooleanQueryInterface;
 use Quince\Pelastic\Contracts\Queries\BoostableInterface;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
 use Quince\Pelastic\Exceptions\PelasticLogicException;
 
-class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInterface, BoostableInterface {
+class BooleanQuery extends Query implements BooleanQueryInterface, BoostableInterface {
 
     /**
      * @param array $shoulds
@@ -54,7 +53,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
 
                 foreach ($queries as $queryItem) {
 
-                    if(!$queryItem instanceof QueryInterface) {
+                    if (!$queryItem instanceof QueryInterface) {
 
                         throw new PelasticInvalidArgumentException("All of set queries in a bool query should be an instance of QueryInterface");
 
@@ -72,31 +71,23 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
 
         $query = ['bool' => $query];
 
-        if ($boost = $this->getBoost() !== null) $query['bool']['boost'] = $boost;
+        if ($boost = $this->getBoost() !== null) {
+            $query['bool']['boost'] = $boost;
+        }
 
         $minShMatch = $this->getAttribute('minimum_should_match', false, null);
 
-        if ($minShMatch !== null) $query['bool']['minimum_should_match'] = $minShMatch;
+        if ($minShMatch !== null) {
+            $query['bool']['minimum_should_match'] = $minShMatch;
+        }
 
         $coord = $this->getAttribute('coord', false, null);
 
-        if($coord !== null) $query['bool']['disable_coord'] = !(bool) $coord;
+        if ($coord !== null) {
+            $query['bool']['disable_coord'] = !(bool) $coord;
+        }
 
         return $query;
-    }
-
-    /**
-     * Ensure that query is valid
-     *
-     * @param array $query
-     */
-    protected function checkQuery(array &$query)
-    {
-        if (empty($query)) {
-
-            throw new PelasticLogicException("You should at least add one query to a boolean query");
-
-        }
     }
 
     /**
@@ -128,7 +119,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
     /**
      * A collection of shoulds
      *
-     * @param $queries
+     * @param array $queries
      * @return $this
      */
     public function shoulds($queries)
@@ -147,7 +138,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
     /**
      * A collection of musts
      *
-     * @param $queries
+     * @param array $queries
      * @return $this
      */
     public function musts($queries)
@@ -166,7 +157,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
     /**
      * Collection of must nots
      *
-     * @param $queries
+     * @param array $queries
      * @return $this
      */
     public function mustNots($queries)
@@ -220,7 +211,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
     /**
      * Bulk shoulds
      *
-     * @param $queries
+     * @param array $queries
      * @return $this
      */
     public function ors($queries)
@@ -231,7 +222,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
     /**
      * Bulk musts
      *
-     * @param $queries
+     * @param array $queries
      * @return $this
      */
     public function ands($queries)
@@ -275,7 +266,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
     /**
      * Add minimum should match functionality
      *
-     * @param $value
+     * @param mixed $value
      * @return $this
      */
     public function withMinimumShouldMatch($value)
@@ -286,7 +277,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
     /**
      * A proxy to set minimum should match
      *
-     * @param $value
+     * @param mixed $value
      * @return $this
      */
     public function setMinimumShouldMatch($value)
@@ -296,22 +287,6 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
         $this->setAttribute('minimum_should_match', $value);
 
         return $this;
-    }
-
-    /**
-     * Only validates minimum should match value and throws exception on failure
-     *
-     * @param $value
-     */
-    protected function validateMinimumShouldMatchValue($value)
-    {
-        if (is_integer($value)) return;
-
-        if (preg_match('/[0-9]?%/', $value)) return;
-
-        $pattern = '/[0-9]?(<|<=|>|>=|<-|>-)[0-9]?%/';
-
-        // FIXME add the full pattern
     }
 
     /**
@@ -336,5 +311,39 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
         $this->setAttribute('coord', false);
 
         return $this;
+    }
+
+    /**
+     * Ensure that query is valid
+     *
+     * @param array $query
+     */
+    protected function checkQuery(array &$query)
+    {
+        if (empty($query)) {
+
+            throw new PelasticLogicException("You should at least add one query to a boolean query");
+
+        }
+    }
+
+    /**
+     * Only validates minimum should match value and throws exception on failure
+     *
+     * @param mixed $value
+     */
+    protected function validateMinimumShouldMatchValue($value)
+    {
+        if (is_integer($value)) {
+            return;
+        }
+
+        if (preg_match('/[0-9]?%/', $value)) {
+            return;
+        }
+
+        $pattern = '/[0-9]?(<|<=|>|>=|<-|>-)[0-9]?%/';
+
+        // FIXME add the full pattern
     }
 }

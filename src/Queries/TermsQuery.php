@@ -4,12 +4,12 @@ use Quince\Pelastic\Contracts\ArrayableInterface;
 use Quince\Pelastic\Contracts\Queries\BoostableInterface;
 use Quince\Pelastic\Contracts\Queries\TermsQueryInterface;
 
-class TermsQuery extends Query implements TermsQueryInterface, ArrayableInterface, BoostableInterface {
+class TermsQuery extends Query implements TermsQueryInterface, BoostableInterface {
 
     /**
      * Set field attribute
      *
-     * @param $field
+     * @param string $field
      * @return $this
      */
     public function setField($field)
@@ -22,8 +22,8 @@ class TermsQuery extends Query implements TermsQueryInterface, ArrayableInterfac
     /**
      * A more friendly proxy to set terms method
      *
-     * @param $terms
-     * @return TermsQuery
+     * @param array $terms
+     * @return $this
      */
     public function setIn($terms)
     {
@@ -36,8 +36,8 @@ class TermsQuery extends Query implements TermsQueryInterface, ArrayableInterfac
      * Sets array of terms into terms attribute of an elasticsearch query
      * acts like "where in" on sql
      *
-     * @param $terms
-     * @return TermsQuery
+     * @param array $terms
+     * @return $this
      */
     public function setTerms($terms)
     {
@@ -49,8 +49,8 @@ class TermsQuery extends Query implements TermsQueryInterface, ArrayableInterfac
     /**
      * A Proxy on set terms
      *
-     * @param $terms
-     * @return TermsQuery
+     * @param array $terms
+     * @return $this
      */
     public function in($terms)
     {
@@ -86,7 +86,7 @@ class TermsQuery extends Query implements TermsQueryInterface, ArrayableInterfac
     /**
      * Add boost to query
      *
-     * @param $query
+     * @param array $query
      * @return array
      */
     protected function addBoostToQuery($query)

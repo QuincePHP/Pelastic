@@ -21,7 +21,7 @@ interface BooleanQueryInterface extends QueryInterface {
     /**
      * A collection of shoulds
      *
-     * @param $queries
+     * @param array $queries
      * @return $this
      */
     public function shoulds($queries);
@@ -29,7 +29,7 @@ interface BooleanQueryInterface extends QueryInterface {
     /**
      * A collection of musts
      *
-     * @param $queries
+     * @param array $queries
      * @return $this
      */
     public function musts($queries);
@@ -37,7 +37,7 @@ interface BooleanQueryInterface extends QueryInterface {
     /**
      * Collection of must nots
      *
-     * @param $queries
+     * @param array $queries
      * @return $this
      */
     public function mustNots($queries);
@@ -69,7 +69,7 @@ interface BooleanQueryInterface extends QueryInterface {
     /**
      * Bulk shoulds
      *
-     * @param $queries
+     * @param array $queries
      * @return $this
      */
     public function ors($queries);
@@ -77,7 +77,7 @@ interface BooleanQueryInterface extends QueryInterface {
     /**
      * Bulk musts
      *
-     * @param $queries
+     * @param array $queries
      * @return $this
      */
     public function ands($queries);
@@ -109,7 +109,7 @@ interface BooleanQueryInterface extends QueryInterface {
     /**
      * Add minimum should match functionality
      *
-     * @param $value
+     * @param mixed $value
      * @return $this
      */
     public function withMinimumShouldMatch($value);
@@ -117,7 +117,7 @@ interface BooleanQueryInterface extends QueryInterface {
     /**
      * A proxy to set minimum should match
      *
-     * @param $value
+     * @param mixed $value
      * @return $this
      */
     public function setMinimumShouldMatch($value);
@@ -135,4 +135,5 @@ interface BooleanQueryInterface extends QueryInterface {
      * @return $this
      */
     public function disableCoord();
+
 }

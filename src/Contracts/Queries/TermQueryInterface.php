@@ -5,7 +5,7 @@ interface TermQueryInterface extends QueryInterface {
     /**
      * Set field to exact match a value inside that
      *
-     * @param mixed $field
+     * @param string $field
      * @return TermQueryInterface
      */
     public function setField($field);
@@ -13,16 +13,9 @@ interface TermQueryInterface extends QueryInterface {
     /**
      * Set value to exact match against the field values
      *
-     * @param mixed $value
+     * @param string $value
      * @return TermQueryInterface
      */
     public function setValue($value);
 
-    /**
-     * Set boost value for the query
-     *
-     * @param mixed $boostValue
-     * @return TermQueryInterface
-     */
-    public function setBoost($boostValue);
 }

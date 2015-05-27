@@ -1,15 +1,14 @@
 <?php namespace Quince\Pelastic\Queries;
 
-use Quince\Pelastic\Contracts\ArrayableInterface;
 use Quince\Pelastic\Contracts\Queries\BoostableInterface;
 use Quince\Pelastic\Contracts\Queries\WildcardQueryInterface;
 
-class WildcardQuery extends Query implements WildcardQueryInterface, BoostableInterface, ArrayableInterface {
+class WildcardQuery extends Query implements WildcardQueryInterface, BoostableInterface {
 
     /**
-     * @param $for
-     * @param $wildcardValue
-     * @param null $boost
+     * @param mixed       $for
+     * @param string      $wildcardValue
+     * @param double|null $boost
      */
     public function __construct($for, $wildcardValue, $boost = null)
     {
@@ -43,7 +42,7 @@ class WildcardQuery extends Query implements WildcardQueryInterface, BoostableIn
             ]
         ];
 
-        if($boost = $this->getBoost()) {
+        if ($boost = $this->getBoost()) {
 
             $query['wildcard'][$field]['boost'] = $boost;
 
@@ -55,7 +54,7 @@ class WildcardQuery extends Query implements WildcardQueryInterface, BoostableIn
     /**
      * Set field to apply wildcard query
      *
-     * @param $field
+     * @param string $field
      * @return $this
      */
     public function setWildCardField($field)
@@ -66,7 +65,7 @@ class WildcardQuery extends Query implements WildcardQueryInterface, BoostableIn
     /**
      * A proxy on setWildCardFieldMethod
      *
-     * @param $field
+     * @param mixed $field
      * @return $this
      */
     public function setField($field)
@@ -77,8 +76,8 @@ class WildcardQuery extends Query implements WildcardQueryInterface, BoostableIn
     /**
      * A proxy on set field method
      *
-     * @param $field
-     * @return WildcardQuery
+     * @param mixed $field
+     * @return $this
      */
     public function forField($field)
     {
@@ -88,7 +87,7 @@ class WildcardQuery extends Query implements WildcardQueryInterface, BoostableIn
     /**
      * Set wild card value
      *
-     * @param $value
+     * @param string $value
      * @return $this
      */
     public function setWildCardValue($value)
@@ -99,8 +98,8 @@ class WildcardQuery extends Query implements WildcardQueryInterface, BoostableIn
     /**
      * A proxy on setWildCardValue
      *
-     * @param $value
-     * @return WildcardQuery
+     * @param string $value
+     * @return $this
      */
     public function like($value)
     {
@@ -136,7 +135,7 @@ class WildcardQuery extends Query implements WildcardQueryInterface, BoostableIn
     /**
      * Match only with single character in both sides of an string
      *
-     * @param $string
+     * @param string $string
      * @return string
      */
     public function wrapSingleAroundString($string)
@@ -147,7 +146,7 @@ class WildcardQuery extends Query implements WildcardQueryInterface, BoostableIn
     /**
      * Only match single for end of the string
      *
-     * @param $string
+     * @param string $string
      * @return string
      */
     public function endSingleMatchForString($string)
@@ -158,6 +157,7 @@ class WildcardQuery extends Query implements WildcardQueryInterface, BoostableIn
     /**
      * Single char match from the beginning of the string
      *
+     * @param string $string
      * @return string
      */
     public function beginSingleMatchForString($string)
@@ -168,7 +168,7 @@ class WildcardQuery extends Query implements WildcardQueryInterface, BoostableIn
     /**
      * match any single for end of the string
      *
-     * @param $string
+     * @param string $string
      * @return string
      */
     public function wrapAnyAroundString($string)
@@ -179,7 +179,7 @@ class WildcardQuery extends Query implements WildcardQueryInterface, BoostableIn
     /**
      * any char match from the beginning of the string
      *
-     * @param $string
+     * @param string $string
      * @return string
      */
     public function beingAnyMatchForString($string)
@@ -190,7 +190,7 @@ class WildcardQuery extends Query implements WildcardQueryInterface, BoostableIn
     /**
      * any char match from the end of the string
      *
-     * @param $string
+     * @param string $string
      * @return string
      */
     public function endAnyMatchForString($string)

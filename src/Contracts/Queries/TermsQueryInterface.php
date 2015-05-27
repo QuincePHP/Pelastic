@@ -7,7 +7,7 @@ interface TermsQueryInterface extends QueryInterface {
     /**
      * Sets field to search on
      *
-     * @param $field
+     * @param string $field
      * @return $this
      */
     public function setField($field);
@@ -15,7 +15,7 @@ interface TermsQueryInterface extends QueryInterface {
     /**
      * A Proxy on set terms
      *
-     * @param $terms
+     * @param array $terms
      * @return TermsQuery
      */
     public function setIn($terms);
@@ -23,7 +23,7 @@ interface TermsQueryInterface extends QueryInterface {
     /**
      * Acts like where in with exact values
      *
-     * @param $terms
+     * @param array $terms
      * @return $this
      */
     public function setTerms($terms);
@@ -31,7 +31,7 @@ interface TermsQueryInterface extends QueryInterface {
     /**
      * A more human friendly proxy on set terms
      *
-     * @param $terms
+     * @param array $terms
      * @return $this
      */
     public function in($terms);
