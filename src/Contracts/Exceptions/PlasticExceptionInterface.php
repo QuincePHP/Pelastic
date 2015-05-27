@@ -1,5 +1,5 @@
-<?php namespace Quince\Plastic\Contracts\Exceptions;
+<?php namespace Quince\Pelastic\Contracts\Exceptions;
 
-interface PlasticExceptionInterface {
+interface PelasticExceptionInterface {
 
 }

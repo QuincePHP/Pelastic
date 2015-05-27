@@ -1,9 +1,9 @@
 <?php namespace Quince\Pelastic\Queries;
 
-use Quince\Exceptions\PlasticInvalidArgumentException;
+use Quince\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Contracts\Queries\AccessorMutatorInterface;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
-use Quince\Plastic\Exceptions\PlasticLogicException;
+use Quince\Pelastic\Exceptions\PelasticLogicException;
 
 abstract class Query implements AccessorMutatorInterface {
 
@@ -19,7 +19,7 @@ abstract class Query implements AccessorMutatorInterface {
      * @param bool $hardCheck
      * @param null $defaultValue
      * @return null|string
-     * @throws PlasticLogicException
+     * @throws PelasticLogicException
      */
     public function getAttribute($attributeName, $hardCheck = false, $defaultValue = null)
     {
@@ -31,7 +31,7 @@ abstract class Query implements AccessorMutatorInterface {
 
         }elseif ($hardCheck) {
 
-            throw new PlasticLogicException("You should have set a value for {$attributeName}.");
+            throw new PelasticLogicException("You should have set a value for {$attributeName}.");
 
         }
 
@@ -67,13 +67,13 @@ abstract class Query implements AccessorMutatorInterface {
      *
      * @param $boostValue
      * @return $this
-     * @throws PlasticInvalidArgumentException
+     * @throws PelasticInvalidArgumentException
      */
     public function setBoost($boostValue)
     {
         if (!is_numeric($boostValue)) {
 
-            throw new PlasticInvalidArgumentException("The boost value should be numeric.");
+            throw new PelasticInvalidArgumentException("The boost value should be numeric.");
 
         }
 
@@ -110,7 +110,7 @@ abstract class Query implements AccessorMutatorInterface {
 
             $this->setAttribute($field, $collection);
 
-        }catch (PlasticLogicException $e) {
+        }catch (PelasticLogicException $e) {
             // In case array has not been created yet
             $this->setAttribute($field, $collection = [$what]);
 

@@ -2,7 +2,7 @@
 
 use Quince\Pelastic\Contracts\ArrayableInterface;
 use Quince\Pelastic\Contracts\Queries\TermQueryInterface;
-use Quince\Plastic\Exceptions\PlasticLogicException;
+use Quince\Pelastic\Exceptions\PelasticLogicException;
 
 /**
  * Class TermQuery
@@ -79,7 +79,7 @@ class TermQuery extends Query implements TermQueryInterface, ArrayableInterface 
      *
      * @param array $query
      * @return array
-     * @throws PlasticLogicException
+     * @throws PelasticLogicException
      */
     protected function addBoosToQuery(array $query)
     {

@@ -1,7 +1,7 @@
 <?php namespace Quince\Exceptions;
 
-use Quince\Plastic\Contracts\Exceptions\PlasticExceptionInterface;
+use Quince\Pelastic\Contracts\Exceptions\PelasticExceptionInterface;
 
-class PlasticInvalidArgumentException extends \InvalidArgumentException implements PlasticExceptionInterface {
+class PelasticInvalidArgumentException extends \InvalidArgumentException implements PelasticExceptionInterface {
 
 }

@@ -1,11 +1,11 @@
 <?php namespace Quince\Pelastic\Queries;
 
-use Quince\Exceptions\PlasticInvalidArgumentException;
+use Quince\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Contracts\ArrayableInterface;
 use Quince\Pelastic\Contracts\Queries\BooleanQueryInterface;
 use Quince\Pelastic\Contracts\Queries\BoostableInterface;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
-use Quince\Plastic\Exceptions\PlasticLogicException;
+use Quince\Pelastic\Exceptions\PelasticLogicException;
 
 class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInterface, BoostableInterface {
 
@@ -56,7 +56,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
 
                     if(!$queryItem instanceof QueryInterface) {
 
-                        throw new PlasticInvalidArgumentException("All of set queries in a bool query should be an instance of QueryInterface");
+                        throw new PelasticInvalidArgumentException("All of set queries in a bool query should be an instance of QueryInterface");
 
                     }
 
@@ -94,7 +94,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
     {
         if (empty($query)) {
 
-            throw new PlasticLogicException("You should at least add one query to a boolean query");
+            throw new PelasticLogicException("You should at least add one query to a boolean query");
 
         }
     }
