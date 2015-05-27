@@ -3,6 +3,7 @@
 use Quince\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
 use Quince\Pelastic\Contracts\StaticQueryFactoryInterface;
+use Stringy\StaticStringy;
 
 class StaticQueryFactory implements StaticQueryFactoryInterface {
 
@@ -50,7 +51,9 @@ class StaticQueryFactory implements StaticQueryFactoryInterface {
      */
     protected static function getClassNameFromKeyword($keyword)
     {
-        return rtrim(__NAMESPACE__, "\\") . "\\Queries" . ucfirst($keyword) . 'Query';
+        $keyword = ucfirst(StaticStringy::camelize($keyword));
+
+        return rtrim(__NAMESPACE__, "\\") . "\\Queries\\" . $keyword . 'Query';
     }
 
     /**
