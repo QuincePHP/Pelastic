@@ -1,7 +1,7 @@
 <?php namespace Quince\Pelastic\Queries;
 
-use Quince\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
+use Quince\Pelastic\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Exceptions\PelasticLogicException;
 
 abstract class Query implements QueryInterface {
