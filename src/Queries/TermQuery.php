@@ -18,14 +18,18 @@ class TermQuery extends Query implements TermQueryInterface {
      * @param string      $value
      * @param double|null $boost
      */
-    public function __construct($field, $value, $boost = null)
+    public function __construct($field = null, $value = null, $boost = null)
     {
-        $this->setField($field)->setValue($value);
+        if ($field !== null) {
+            $this->setField($field);
+        }
+
+        if ($value !== null) {
+            $this->setValue($value);
+        }
 
         if ($boost !== null) {
-
             $this->setBoost($boost);
-
         }
     }
 
