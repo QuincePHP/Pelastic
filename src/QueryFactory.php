@@ -40,4 +40,14 @@ class QueryFactory implements QueryFactoryInterface {
     {
         return forward_static_call_array([StaticQueryFactory::class, $method], $args);
     }
+
+    /**
+     * Get interface that all created classes by factory should implement
+     *
+     * @return string
+     */
+    public function getInterface()
+    {
+        return StaticQueryFactory::getInterface();
+    }
 }

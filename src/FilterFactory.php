@@ -40,4 +40,14 @@ class FilterFactory implements FilterFactoryInterface {
     {
         return forward_static_call_array([StaticFilterFactory::class, $method], $args);
     }
+
+    /**
+     * Get interface that all created classes by factory should implement
+     *
+     * @return string
+     */
+    public function getInterface()
+    {
+        return StaticFilterFactory::getInterface();
+    }
 }
