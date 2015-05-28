@@ -57,7 +57,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
                 /** @var QueryInterface $queryItem */
                 foreach ($queries as $queryItem) {
 
-                    if(!$queryItem instanceof QueryInterface) {
+                    if (!$queryItem instanceof QueryInterface) {
 
                         throw new PelasticInvalidArgumentException("All of set queries in a bool query should be an instance of QueryInterface");
 
