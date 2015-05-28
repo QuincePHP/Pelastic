@@ -30,7 +30,7 @@ class TermQueryTest extends BaseTestCase {
         }
     }
 
-    public function test_final_generated_array_without_construct()
+    public function test_final_generated_array_with_and_without_construct()
     {
         $expected = [
             'term' => [
