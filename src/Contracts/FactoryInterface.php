@@ -23,4 +23,11 @@ interface FactoryInterface {
      */
     public function create($what, array $args = []);
 
+    /**
+     * Get interface that all created classes by factory should implement
+     *
+     * @return string
+     */
+    public function getInterface();
+
 }
