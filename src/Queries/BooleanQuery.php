@@ -337,4 +337,70 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
 
         return $this;
     }
+
+    /**
+     * Get musts array
+     *
+     * @return array
+     */
+    public function  getMusts()
+    {
+        return $this->getAttribute('must', false, []);
+    }
+
+    /**
+     * Get shoulds array
+     *
+     * @return array
+     */
+    public function getShoulds()
+    {
+        return $this->getAttribute('should', false, []);
+    }
+
+    /**
+     * Get must nots array
+     *
+     * @return array|null
+     */
+    public function getMustNots()
+    {
+        return $this->getAttribute('must_not', false, []);
+    }
+
+    /**
+     * Remove all shoulds
+     *
+     * @return $this
+     */
+    public function removeShoulds()
+    {
+        unset($this->optionAttribute['should']);
+
+        return $this;
+    }
+
+    /**
+     * Remove all musts
+     *
+     * @return $this
+     */
+    public function removeMusts()
+    {
+        unset($this->optionAttribute['must']);
+
+        return $this;
+    }
+
+    /**
+     * Remove all must not queries
+     *
+     * @return $this
+     */
+    public function removeMustNots()
+    {
+        unset($this->optionAttribute['must_not']);
+
+        return $this;
+    }
 }

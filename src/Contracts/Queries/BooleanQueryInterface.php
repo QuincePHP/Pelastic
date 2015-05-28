@@ -135,4 +135,46 @@ interface BooleanQueryInterface extends QueryInterface {
      * @return $this
      */
     public function disableCoord();
+
+    /**
+     * Get musts array
+     *
+     * @return array
+     */
+    public function  getMusts();
+
+    /**
+     * Get shoulds array
+     *
+     * @return array
+     */
+    public function getShoulds();
+
+    /**
+     * Get must nots array
+     *
+     * @return array
+     */
+    public function getMustNots();
+
+    /**
+     * Remove all shoulds
+     *
+     * @return $this
+     */
+    public function removeShoulds();
+
+    /**
+     * Remove all musts
+     *
+     * @return $this
+     */
+    public function removeMusts();
+
+    /**
+     * Remove all must not queries
+     *
+     * @return $this
+     */
+    public function removeMustNots();
 }
