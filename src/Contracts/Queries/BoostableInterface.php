@@ -1,5 +1,7 @@
 <?php namespace Quince\Pelastic\Contracts\Queries;
 
+use Quince\Exceptions\PelasticInvalidArgumentException;
+
 interface BoostableInterface {
 
     /**
