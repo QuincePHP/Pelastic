@@ -5,7 +5,7 @@
 ### Introduction
 The philosophy of the *Pelastic* project is to provide a human friendly, object oriented layer around *elasticsearch*'s DSL.  
 
-*Elasticsearch* contains two main DSLs, the query DSL and the filter DSL, *Pelastic* makes it easy two work with them by treating them as objects in your PHP application.
+*Elasticsearch* contains two main DSLs, the query DSL and the filter DSL, *Pelastic* makes it easy to work with them by treating them as objects in your PHP application.
 
 ### Features
  - Explicit Query and Filter classes based on elasticsearch docs.
