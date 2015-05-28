@@ -1,4 +1,4 @@
-<?php namespace Quince\Pelastic\Contracts\Queries;
+<?php namespace Quince\Pelastic\Contracts;
 
 use Quince\Pelastic\Exceptions\PelasticLogicException;
 
