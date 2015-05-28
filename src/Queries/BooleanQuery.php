@@ -9,6 +9,8 @@ use Quince\Pelastic\Exceptions\PelasticLogicException;
 
 class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInterface, BoostableInterface {
 
+    use FieldQueryableTrait;
+
     /**
      * @param array $shoulds
      * @param array $musts

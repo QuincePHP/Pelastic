@@ -2,11 +2,11 @@
 
 interface JsonableInterface {
 
-	/**
-	 * An json representation of object
-	 *
-	 * @return json
-	 */
-	public function toJson();
+    /**
+     * An json representation of object
+     *
+     * @return json
+     */
+    public function toJson();
 
 }

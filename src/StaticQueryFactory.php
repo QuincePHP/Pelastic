@@ -3,15 +3,14 @@
 use Quince\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
 use Quince\Pelastic\Contracts\StaticQueryFactoryInterface;
-use Stringy\StaticStringy;
 
-class StaticQueryFactory implements StaticQueryFactoryInterface {
+class StaticQueryFactory extends StaticFactory implements StaticQueryFactoryInterface {
 
     /**
      * Creates the factory object of the given class with given arguments
      *
-     * @param $class
-     * @param array $args
+     * @param string $class
+     * @param array  $args
      * @return QueryInterface
      */
     public static function createFromClass($class, array $args = [])
@@ -22,8 +21,8 @@ class StaticQueryFactory implements StaticQueryFactoryInterface {
     /**
      * Creates factory objects from keywords
      *
-     * @param $what
-     * @param array $args
+     * @param string $what
+     * @param array  $args
      * @return QueryInterface
      */
     public static function create($what, array $args = [])
@@ -32,7 +31,7 @@ class StaticQueryFactory implements StaticQueryFactoryInterface {
 
             return static::createFromClass(static::getClassNameFromKeyword($what), $args);
 
-        } catch(PelasticInvalidArgumentException $e) {
+        } catch (PelasticInvalidArgumentException $e) {
 
             $eMessage = $e->getMessage();
 
@@ -46,42 +45,13 @@ class StaticQueryFactory implements StaticQueryFactoryInterface {
     /**
      * Create a class name from the given keyword
      *
-     * @param $keyword
+     * @param string $keyword
      * @return string
      */
     protected static function getClassNameFromKeyword($keyword)
     {
-        $keyword = ucfirst(StaticStringy::camelize($keyword));
+        $keyword = static::makeStudly($keyword);
 
         return rtrim(__NAMESPACE__, "\\") . "\\Queries\\" . $keyword . 'Query';
-    }
-
-    /**
-     * Creates class with reflection given some args
-     *
-     * @param $class
-     * @param array $args
-     * @return object
-     */
-    protected static function makeClassByReflection($class, array $args)
-    {
-        $reflectionClass = new \ReflectionClass($class);
-
-        if (!$reflectionClass->implementsInterface(QueryInterface::class)) {
-
-            throw new PelasticInvalidArgumentException("Given class name does not implement the QueryInterface.");
-
-        }
-
-        return $reflectionClass->newInstanceArgs($args);
-    }
-
-    /**
-     * @param $class
-     * @return QueryInterface
-     */
-    protected static function makeClass($class)
-    {
-        return new $class;
     }
 }

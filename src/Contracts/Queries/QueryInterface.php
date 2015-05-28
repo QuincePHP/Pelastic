@@ -1,5 +1,7 @@
 <?php namespace Quince\Pelastic\Contracts\Queries;
 
-interface QueryInterface {
+use Quince\Pelastic\Contracts\ArrayableInterface;
+
+interface QueryInterface extends AccessorMutatorInterface, BoostableInterface, ArrayableInterface {
 
 }

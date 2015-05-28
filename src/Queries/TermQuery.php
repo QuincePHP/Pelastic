@@ -1,6 +1,5 @@
 <?php namespace Quince\Pelastic\Queries;
 
-use Quince\Pelastic\Contracts\ArrayableInterface;
 use Quince\Pelastic\Contracts\Queries\TermQueryInterface;
 use Quince\Pelastic\Exceptions\PelasticLogicException;
 
@@ -10,12 +9,14 @@ use Quince\Pelastic\Exceptions\PelasticLogicException;
  *
  * @package Quince\Pelastic\Queries
  */
-class TermQuery extends Query implements TermQueryInterface, ArrayableInterface {
+class TermQuery extends Query implements TermQueryInterface {
+
+    use FieldQueryableTrait;
 
     /**
-     * @param $field
-     * @param $value
-     * @param null $boost
+     * @param string      $field
+     * @param string      $value
+     * @param double|null $boost
      */
     public function __construct($field, $value, $boost = null)
     {
@@ -37,6 +38,7 @@ class TermQuery extends Query implements TermQueryInterface, ArrayableInterface 
     public function setField($field)
     {
         $this->setAttribute('field', $field);
+
         return $this;
     }
 
@@ -49,6 +51,7 @@ class TermQuery extends Query implements TermQueryInterface, ArrayableInterface 
     public function setValue($value)
     {
         $this->setAttribute('value', $value);
+
         return $this;
     }
 
@@ -65,13 +68,13 @@ class TermQuery extends Query implements TermQueryInterface, ArrayableInterface 
 
         $query = [
             'term' => [
-                 $field => [
+                $field => [
                     'value' => $value
                 ]
             ]
         ];
 
-        return $this->addBoosToQuery($query);
+        return $this->addBoostToQuery($query);
     }
 
     /**
@@ -81,7 +84,7 @@ class TermQuery extends Query implements TermQueryInterface, ArrayableInterface 
      * @return array
      * @throws PelasticLogicException
      */
-    protected function addBoosToQuery(array $query)
+    protected function addBoostToQuery(array $query)
     {
         $boost = $this->getAttribute('boost', false, null);
 
