@@ -54,6 +54,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
 
             if (!empty($queries)) {
 
+                /** @var QueryInterface $queryItem */
                 foreach ($queries as $queryItem) {
 
                     if(!$queryItem instanceof QueryInterface) {
@@ -62,7 +63,7 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
 
                     }
 
-                    $query[$field][] = $queryItem;
+                    $query[$field][] = $queryItem->toArray();
 
                 }
 
@@ -74,15 +75,21 @@ class BooleanQuery extends Query implements BooleanQueryInterface, ArrayableInte
 
         $query = ['bool' => $query];
 
-        if ($boost = $this->getBoost() !== null) $query['bool']['boost'] = $boost;
+        if ($boost = $this->getBoost() !== null) {
+            $query['bool']['boost'] = $boost;
+        }
 
         $minShMatch = $this->getAttribute('minimum_should_match', false, null);
 
-        if ($minShMatch !== null) $query['bool']['minimum_should_match'] = $minShMatch;
+        if ($minShMatch !== null) {
+            $query['bool']['minimum_should_match'] = $minShMatch;
+        }
 
         $coord = $this->getAttribute('coord', false, null);
 
-        if($coord !== null) $query['bool']['disable_coord'] = !(bool) $coord;
+        if ($coord !== null) {
+            $query['bool']['disable_coord'] = !(bool) $coord;
+        }
 
         return $query;
     }
