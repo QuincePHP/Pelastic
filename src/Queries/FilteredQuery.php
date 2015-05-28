@@ -50,7 +50,7 @@ class FilteredQuery extends Query implements FilteredQueryInterface, FilteredQue
         }
 
         if ($strategy !== null) {
-
+            $this->setStrategy($strategy);
         }
     }
 
