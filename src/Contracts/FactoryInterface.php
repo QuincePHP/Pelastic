@@ -1,5 +1,6 @@
 <?php namespace Quince\Pelastic\Contracts;
 
+use Quince\Pelastic\Contracts\Filters\FilterInterface;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
 
 interface FactoryInterface {
@@ -9,7 +10,7 @@ interface FactoryInterface {
      *
      * @param string $class
      * @param array  $args
-     * @return QueryInterface
+     * @return QueryInterface|FilterInterface
      */
     public function createFromClass($class, array $args = []);
 
@@ -18,7 +19,7 @@ interface FactoryInterface {
      *
      * @param string $what
      * @param array  $args
-     * @return QueryInterface
+     * @return QueryInterface|FilterInterface
      */
     public function create($what, array $args = []);
 
