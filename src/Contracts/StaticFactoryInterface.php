@@ -23,4 +23,10 @@ interface StaticFactoryInterface {
      */
     public static function create($what, array $args = []);
 
+    /**
+     * Get interface which all given classes should implement that
+     *
+     * @return string
+     */
+    public static function getInterface();
 }
