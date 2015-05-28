@@ -34,4 +34,27 @@ interface FilteredQueryInterface extends QueryInterface{
      */
     public function filter(FilterInterface $filter);
 
+    /**
+     * Set strategy
+     *
+     * @param $strategy
+     * @return $this
+     */
+    public function setStrategy($strategy);
+
+    /**
+     * Get strategy
+     *
+     * @return string
+     */
+    public function getStrategy();
+
+    /**
+     * If given strategy is valid
+     *
+     * @param $strategy
+     * @return bool
+     */
+    public function strategyIsValid($strategy);
+
 }
