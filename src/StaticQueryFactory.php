@@ -1,10 +1,15 @@
 <?php namespace Quince\Pelastic;
 
-use Quince\Exceptions\PelasticInvalidArgumentException;
+use Quince\Pelastic\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
 use Quince\Pelastic\Contracts\StaticQueryFactoryInterface;
 
 class StaticQueryFactory extends StaticFactory implements StaticQueryFactoryInterface {
+
+    /**
+     * @var string
+     */
+    protected static $globalInterface = QueryInterface::class;
 
     /**
      * Creates the factory object of the given class with given arguments
@@ -53,5 +58,15 @@ class StaticQueryFactory extends StaticFactory implements StaticQueryFactoryInte
         $keyword = static::makeStudly($keyword);
 
         return rtrim(__NAMESPACE__, "\\") . "\\Queries\\" . $keyword . 'Query';
+    }
+
+    /**
+     * Get interface which all given classes should implement that
+     *
+     * @return string
+     */
+    public static function getInterface()
+    {
+        return static::getInterfaceFromProperty();
     }
 }

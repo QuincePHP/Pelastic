@@ -1,9 +1,11 @@
 <?php namespace Quince\Pelastic;
 
+use Quince\Pelastic\Contracts\Filters\FilterInterface;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
-use Stringy\StaticStringy;
 
-class StaticFilterFactory extends StaticStringy implements StaticFilterFactoryInterface {
+class StaticFilterFactory extends StaticFactory implements StaticFilterFactoryInterface {
+
+    protected $globalInterface = FilterInterface::class;
 
     /**
      * Creates the factory object of the given class with given arguments
@@ -14,7 +16,7 @@ class StaticFilterFactory extends StaticStringy implements StaticFilterFactoryIn
      */
     public static function createFromClass($class, array $args = [])
     {
-        // TODO: Implement createFromClass() method.
+        return static::makeClassByReflection($class, $args);
     }
 
     /**
@@ -26,6 +28,20 @@ class StaticFilterFactory extends StaticStringy implements StaticFilterFactoryIn
      */
     public static function create($what, array $args = [])
     {
-        // TODO: Implement create() method.
+        $class = static::makeStudly($what);
+
+        $class = rtrim(__NAMESPACE__, "\\") . "\\Filters\\" . $class . 'Filter';
+
+        return self::createFromClass($class, $args);
+    }
+
+    /**
+     * Get interface which all given classes should implement that
+     *
+     * @return string
+     */
+    public static function getInterface()
+    {
+        return static::getInterfaceFromProperty();
     }
 }
