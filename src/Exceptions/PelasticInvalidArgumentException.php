@@ -1,4 +1,4 @@
-<?php namespace Quince\Exceptions;
+<?php namespace Quince\Pelastic\Exceptions;
 
 use Quince\Pelastic\Contracts\Exceptions\PelasticExceptionInterface;
 
