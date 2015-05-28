@@ -6,7 +6,7 @@ interface FieldQueryableInterface {
      * Set field to exact match a value inside that
      *
      * @param string $field
-     * @return TermQueryInterface
+     * @return $this
      */
     public function setField($field);
 
