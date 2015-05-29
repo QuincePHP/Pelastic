@@ -1,6 +1,6 @@
 <?php namespace Quince\Pelastic\Queries;
 
-use Quince\Exceptions\PelasticInvalidArgumentException;
+use Quince\Pelastic\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Contracts\Filters\FilterInterface;
 use Quince\Pelastic\Contracts\Queries\FilteredQueryInterface;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
