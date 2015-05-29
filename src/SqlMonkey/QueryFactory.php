@@ -1,6 +1,6 @@
 <?php namespace Quince\Pelastic\SqlMonkey;
 
-use Quince\Exceptions\PelasticInvalidArgumentException;
+use Quince\Pelastic\Exceptions\PelasticInvalidArgumentException;
 
 class QueryFactory extends \Quince\Pelastic\QueryFactory {
 

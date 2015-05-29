@@ -1,6 +1,6 @@
 <?php namespace Quince\Pelastic\Queries;
 
-use Quince\Exceptions\PelasticInvalidArgumentException;
+use Quince\Pelastic\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Contracts\ArrayableInterface;
 use Quince\Pelastic\Contracts\Queries\BooleanQueryInterface;
 use Quince\Pelastic\Contracts\Queries\BoostableInterface;
