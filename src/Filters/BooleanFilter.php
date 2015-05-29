@@ -11,8 +11,9 @@ class BooleanFilter extends Filter implements BooleanFilterInterface {
      * @param array $musts
      * @param array $shoulds
      * @param array $mustNots
+     * @param null $cache
      */
-    public function __construct(array $musts = null, array $shoulds = null, array $mustNots = null)
+    public function __construct(array $musts = null, array $shoulds = null, array $mustNots = null, $cache = null)
     {
         if ($musts !== null) {
             $this->musts($musts);
@@ -24,6 +25,10 @@ class BooleanFilter extends Filter implements BooleanFilterInterface {
 
         if ($mustNots !== null) {
             $this->mustNots($mustNots);
+        }
+
+        if ($cache !== null) {
+            $this->setCache($cache);
         }
     }
 
@@ -350,5 +355,48 @@ class BooleanFilter extends Filter implements BooleanFilterInterface {
         unset($this->optionAttribute['must']);
 
         return $this;
+    }
+
+    /**
+     * Set cache
+     *
+     * @param (bool) $bool
+     * @return $this
+     */
+    public function setCache($bool)
+    {
+        $this->setAttribute('cache', (bool) $bool);
+
+        return $this;
+    }
+
+    /**
+     * Cache status
+     *
+     * @return bool
+     */
+    public function getCacheStatus()
+    {
+        return (bool) $this->getAttribute('cache', false, null);
+    }
+
+    /**
+     * Enable cache on query
+     *
+     * @return $this
+     */
+    public function enableCache()
+    {
+        return $this->setCache(true);
+    }
+
+    /**
+     * Disable cache
+     *
+     * @return $this
+     */
+    public function disableCache()
+    {
+        return $this->setCache(false);
     }
 }
