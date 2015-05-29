@@ -107,20 +107,6 @@ interface BooleanFilterInterface extends FilterInterface {
     public function iReallyNeed(FilterInterface $filter);
 
     /**
-     * See document on elasticsearch
-     *
-     * @return $this
-     */
-    public function enableCoord();
-
-    /**
-     * See document on elasticsearch
-     *
-     * @return $this
-     */
-    public function disableCoord();
-
-    /**
      * Get musts array
      *
      * @return array

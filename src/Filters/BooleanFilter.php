@@ -68,15 +68,13 @@ class BooleanFilter extends Filter implements BooleanFilterInterface {
 
         $this->checkFilter($filter);
 
-        $query = ['bool' => $filter];
+        $filter = ['bool' => $filter];
 
-        $coord = $this->getAttribute('coord', false, null);
-
-        if ($coord !== null) {
-            $query['bool']['disable_coord'] = !(bool) $coord;
+        if ($status = $this->getCacheStatus()) {
+            $filter['bool']['_cache'] = (bool) $status;
         }
 
-        return $query;
+        return $filter;
     }
 
     /**
@@ -268,30 +266,6 @@ class BooleanFilter extends Filter implements BooleanFilterInterface {
     }
 
     /**
-     * See document on elasticsearch
-     *
-     * @return $this
-     */
-    public function enableCoord()
-    {
-        $this->setAttribute('coord', true);
-
-        return $this;
-    }
-
-    /**
-     * See document on elasticsearch
-     *
-     * @return $this
-     */
-    public function disableCoord()
-    {
-        $this->setAttribute('coord', false);
-
-        return $this;
-    }
-
-    /**
      * Get musts array
      *
      * @return array|null
@@ -377,7 +351,7 @@ class BooleanFilter extends Filter implements BooleanFilterInterface {
      */
     public function getCacheStatus()
     {
-        return (bool) $this->getAttribute('cache', false, null);
+        return $this->getAttribute('cache', false, null);
     }
 
     /**
