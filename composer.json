@@ -21,7 +21,8 @@
 		}
 	},
 	"require": {
-		"guzzle/guzzle": "~5.3"
+        "danielstjules/stringy": "~1.9",
+		"guzzlehttp/guzzle": "~5.3"
 	},
 	"require-dev": {
 		"codeception/codeception": "~2.0",
