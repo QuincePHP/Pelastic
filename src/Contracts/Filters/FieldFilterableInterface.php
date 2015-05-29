@@ -30,15 +30,17 @@ interface FieldFilterableInterface {
     /**
      * Get value of the filter
      *
-     * @return string|null
+     * @param bool $hardCheck
+     * @return null|string
      */
-    public function getValue();
+    public function getValue($hardCheck = false);
 
     /**
      * Get field of the filter
      *
-     * @return string|null
+     * @param bool $hardCheck
+     * @return null|string
      */
-    public function getField();
+    public function getField($hardCheck = false);
 
 }

@@ -52,20 +52,22 @@ trait FieldFilterableTrait {
     /**
      * Get value of the filter
      *
-     * @return string|null
+     * @param bool $hardCheck
+     * @return null|string
      */
-    public function getValue()
+    public function getValue($hardCheck = false)
     {
-        return $this->getAttribute('value', false, null);
+        return $this->getAttribute('value', (bool) $hardCheck, null);
     }
 
     /**
      * Get field of the filter
      *
-     * @return string|null
+     * @param bool $hardCheck
+     * @return null|string
      */
-    public function getField()
+    public function getField($hardCheck = false)
     {
-        return $this->getAttribute('field', false, null);
+        return $this->getAttribute('field', (bool) $hardCheck, null);
     }
 }
