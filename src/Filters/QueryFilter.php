@@ -12,10 +12,8 @@ class QueryFilter extends Filter implements QueryFilterInterface {
      */
     public function toArray()
     {
-        $query = $this->getQuery();
-
         return [
-            "query" => $query->toArray()
+            "query" => $this->getQuery()->toArray()
         ];
     }
 
