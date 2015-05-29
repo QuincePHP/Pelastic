@@ -36,4 +36,10 @@ interface QueryFilterInterface extends FilterInterface {
      */
     public function query(QueryInterface $query);
 
+    /**
+     * Get query which should be applied as a filter
+     *
+     * @return QueryInterface
+     */
+    public function getQuery();
 }
