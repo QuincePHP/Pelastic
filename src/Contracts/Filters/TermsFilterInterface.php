@@ -66,4 +66,20 @@ interface TermsFilterInterface extends FilterInterface {
      */
     public function values($values);
 
+    /**
+     * Get field that the values are applied to
+     *
+     * @param bool $hardCheck
+     * @return null|string
+     */
+    public function getField($hardCheck = false);
+
+    /**
+     * Get values that are applied to the field
+     *
+     * @param bool $hardCheck
+     * @return array|null
+     */
+    public function getValues($hardCheck = false);
+
 }
