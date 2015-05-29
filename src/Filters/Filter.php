@@ -14,7 +14,7 @@ abstract class Filter implements FilterInterface {
      * @param FilterInterface $filter
      * @return array
      */
-    protected function putQueryIntoArrayField($field, FilterInterface $filter)
+    protected function putFilterIntoArrayField($field, FilterInterface $filter)
     {
         return $this->putIntoArrayField($field, $filter);
     }
