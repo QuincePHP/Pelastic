@@ -10,7 +10,7 @@ The philosophy of the *Pelastic* project is to provide a human friendly, object 
 ### Features
  - Explicit Query and Filter classes based on elasticsearch docs.
  - Plastic ODM, an ODM inspired by Laravel's *Eloquent*.
- - SQL monkey, SQL like abstraction layer over the *query* and *filter* features. (```$monkey->index('blog_posts')->where('_id', '225')->take(5);```).
+ - SQL monkey, SQL like abstraction layer over the *query* and *filter* features. (```$monkey->index('blog_posts')->where('cats.id', 255)->take(5);```).
  - Plastic adapters, easily integrate *Plastic* and its ODM with your faramework's ORM and use them in a hybrid environment.
  - Eventing system, there is an event for any action.
  - Guzzle made request performer, which offers pretty exceptions, so you can develop more debug friendly.
