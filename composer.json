@@ -20,6 +20,11 @@
 			"Quince\\Pelastic\\": "src/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"Quince\\Pelastic\\Tests\\": "test/"
+		}
+	},
 	"require": {
         "danielstjules/stringy": "~1.9",
 		"guzzlehttp/guzzle": "~5.3"
