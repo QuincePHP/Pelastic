@@ -9,6 +9,21 @@ class NotFilter extends Filter implements NotFilterInterface {
     use FilterCacheableTrait;
 
     /**
+     * @param null $not
+     * @param null $cache
+     */
+    public function __construct($not = null, $cache = null)
+    {
+        if (null !== $not) {
+            $this->setNot($not);
+        }
+
+        if (null !== $cache) {
+            $this->setCache((bool) $cache);
+        }
+    }
+
+    /**
      * An array representation of object
      *
      * @return array
