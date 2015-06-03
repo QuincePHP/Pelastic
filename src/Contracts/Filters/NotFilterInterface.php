@@ -1,6 +1,6 @@
 <?php namespace Quince\Pelastic\Contracts\Filters;
 
-interface NotFilter extends FilterInterface, FilterCacheableInterface {
+interface NotFilterInterface extends FilterInterface, FilterCacheableInterface {
 
     /**
      * This filter acts as an all except this filter
