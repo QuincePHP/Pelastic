@@ -1,7 +1,6 @@
 <?php namespace Quince\Pelastic;
 
 use Illuminate\Contracts\Config\PelasticConfigInterface;
-use Quince\Pelastic\Contracts\Api\RepositoryInterface;
 use Quince\Pelastic\Exceptions\PelasticLogicException;
 
 class PelasticManager {
