@@ -1,4 +1,4 @@
-<?php namespace Illuminate\Contracts\Connection;
+<?php namespace Quince\Pelastic\Contracts\Connection;
 
 interface HttpConnectionInterface {
 
