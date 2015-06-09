@@ -1,6 +1,9 @@
 <?php namespace Quince\Pelastic;
 
 use Illuminate\Contracts\Config\PelasticConfigInterface;
+use Illuminate\Contracts\Connection\Pool\ConnectionPoolInterface;
+use Quince\Pelastic\Connection\Selector\PerRequestRoundRobinSelector;
+use Quince\Pelastic\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Exceptions\PelasticLogicException;
 
 class PelasticManager {
@@ -16,6 +19,11 @@ class PelasticManager {
      * @var PelasticManager
      */
     protected static $instance;
+
+    /**
+     * @var ConnectionPoolInterface
+     */
+    protected $pool;
 
     /**
      * Prevent un-serialize
@@ -37,7 +45,7 @@ class PelasticManager {
      *
      * @return PelasticManager
      */
-    public function getInstance()
+    public static function getInstance()
     {
         if (null === static::getConfig()) {
             throw new PelasticLogicException("Entity manager can not work without a config instance");
@@ -56,7 +64,13 @@ class PelasticManager {
      */
     protected function bootstrap()
     {
-        // Do some jobs like initializing connection pool and so on.
+        $class = $this->getConfig()->getConnectionPoolStrategy();
+
+        $this->pool = new $class($this->getSelector());
+
+        if (!is_a($this->pool, $interface = ConnectionPoolInterface::class)) {
+            throw new PelasticInvalidArgumentException("You have selected an invalid connection pool all pools should implement the [$interface] interface.");
+        }
     }
 
     /**
@@ -80,4 +94,27 @@ class PelasticManager {
         return static::$config;
     }
 
+    /**
+     * Get selector which is going to be used
+     *
+     * @return $this
+     */
+    public function getSelector()
+    {
+        if (null === $selector = $this->getConfig()->getSelector()) {
+            $selector = $this->getConfig()->setSelector(new PerRequestRoundRobinSelector());
+        }
+
+        return $selector;
+    }
+
+    /**
+     * Get connection pool
+     *
+     * @return ConnectionPoolInterface
+     */
+    public function getPool()
+    {
+        return $this->pool;
+    }
 }
