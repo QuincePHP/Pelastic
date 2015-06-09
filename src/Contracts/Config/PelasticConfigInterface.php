@@ -1,14 +1,6 @@
-<?php namespace Illuminate\Contracts\Config;
+<?php namespace Quince\Pelastic\Contracts\Config;
 
 interface PelasticConfigInterface {
-
-    /**
-     * Create a new config class from array
-     *
-     * @param array $config
-     * @return $this
-     */
-    public static function buildFromArray(array $config);
 
     /**
      * Set hosts to be used to init connections
