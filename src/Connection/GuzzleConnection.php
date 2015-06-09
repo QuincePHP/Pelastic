@@ -2,7 +2,7 @@
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Request;
-use Illuminate\Contracts\Connection\HttpConnectionInterface;
+use Quince\Pelastic\Contracts\Connection\HttpConnectionInterface;
 use Quince\Pelastic\PelasticManager;
 
 class GuzzleConnection implements HttpConnectionInterface {
