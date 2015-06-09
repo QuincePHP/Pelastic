@@ -1,10 +1,11 @@
 <?php namespace Quince\Pelastic\Connection\Pool;
 
 use Illuminate\Contracts\Connection\HttpConnectionInterface;
+use Illuminate\Contracts\Connection\Pool\ConnectionPoolInterface;
 use Illuminate\Contracts\Connection\Selector\SelectorInterface;
 use Quince\Pelastic\Exceptions\PelasticException;
 
-abstract class ConnectionPool {
+abstract class ConnectionPool implements ConnectionPoolInterface {
 
     /**
      * @var SelectorInterface;
