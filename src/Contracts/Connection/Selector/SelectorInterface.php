@@ -1,4 +1,4 @@
-<?php namespace Illuminate\Contracts\Connection\Selector;
+<?php namespace Quince\Pelastic\Contracts\Connection\Selector;
 
 use Illuminate\Contracts\Connection\HttpConnectionInterface;
 
