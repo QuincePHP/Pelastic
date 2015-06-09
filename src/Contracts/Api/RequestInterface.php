@@ -2,4 +2,11 @@
 
 interface RequestInterface {
 
+    /**
+     * Execute a request
+     *
+     * @return array
+     */
+    public function execute();
+
 }
