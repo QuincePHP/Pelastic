@@ -5,6 +5,7 @@ use Quince\Pelastic\Contracts\Queries\BooleanQueryInterface;
 use Quince\Pelastic\Contracts\SqlMonkey\QueryBuilderInterface;
 use Quince\Pelastic\Exceptions\PelasticException;
 use Quince\Pelastic\Filters\BooleanFilter;
+use Quince\Pelastic\PelasticManager;
 use Quince\Pelastic\Queries\BooleanQuery;
 
 class QueryBuilder implements QueryBuilderInterface {
@@ -28,6 +29,11 @@ class QueryBuilder implements QueryBuilderInterface {
     protected $boolQuery;
 
     /**
+     * @var PelasticManager
+     */
+    protected $manager;
+
+    /**
      * All of the available clause operators.
      *
      * @var array
@@ -41,13 +47,15 @@ class QueryBuilder implements QueryBuilderInterface {
 
     /**
      * Constructor of the class
+     * @param PelasticManager $manager
      * @param BooleanFilterInterface $boolFilter
      * @param BooleanQueryInterface $boolQuery
      */
-    public function __construct(BooleanFilterInterface $boolFilter = null, BooleanQueryInterface $boolQuery = null)
+    public function __construct(PelasticManager $manager = null, BooleanFilterInterface $boolFilter = null, BooleanQueryInterface $boolQuery = null)
     {
         $this->boolFilter = $boolFilter ?: new BooleanFilter;
         $this->boolQuery = $boolQuery ?: new BooleanQuery;
+        $this->manager= $manager ?: PelasticManager::getInstance();
     }
 
     /**
