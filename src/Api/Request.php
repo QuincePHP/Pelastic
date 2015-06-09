@@ -1,12 +1,15 @@
 <?php namespace Quince\Pelastic\Api;
 
 use Quince\Pelastic\AccessibleMutatableTrait;
+use Quince\Pelastic\Contracts\AccessorMutatorInterface;
 use Quince\Pelastic\Contracts\Api\Http;
 use Quince\Pelastic\Contracts\Api\RequestHttpPresenterInterface;
 use Quince\Pelastic\Contracts\Api\RequestInterface;
 use Quince\Pelastic\PelasticManager;
 
 abstract class Request implements  RequestInterface, RequestHttpPresenterInterface {
+
+    use AccessibleMutatableTrait;
 
     /**
      * @var PelasticManager
@@ -31,6 +34,15 @@ abstract class Request implements  RequestInterface, RequestHttpPresenterInterfa
     public function execute()
     {
         $httpPresentation = $this->toHttp();
+
+        $connection = $this->manager->getPool()->getNextConnection();
+
+        return $connection->performRequest(
+            $httpPresentation->getHttpMethod(),
+            $httpPresentation->getParams(),
+            $httpPresentation->getBody(),
+            $httpPresentation->getOptions()
+        );
     }
 
     /**
