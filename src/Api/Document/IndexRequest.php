@@ -2,6 +2,7 @@
 
 use Quince\Pelastic\Api\Request;
 use Quince\Pelastic\Contracts\Api\Document\Index\IndexRequestInterface;
+use Quince\Pelastic\Contracts\Api\Http;
 use Quince\Pelastic\Contracts\DocumentInterface;
 
 class IndexRequest extends Request implements IndexRequestInterface {
@@ -121,5 +122,27 @@ class IndexRequest extends Request implements IndexRequestInterface {
     public function getType()
     {
         return $this->getAttribute('type', false, null);
+    }
+
+    /**
+     * Convert a request to http
+     *
+     * @return Http
+     */
+    public function toHttp()
+    {
+        $uri = $this->getIndex();
+
+        if (null !== $this->getType()) {
+            $uri .= '/' . $this->getType();
+        }
+
+        if (null !== $this->getDocumentId()) {
+            $uri .= '/' . $this->getDocumentId();
+        }
+
+        $body = $this->getDocument()->toArray();
+
+        return new Http('PUT', $uri, null, $body);
     }
 }
