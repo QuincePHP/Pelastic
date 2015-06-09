@@ -66,5 +66,5 @@ class PelasticManager {
     {
         return static::$config;
     }
-    
+
 }
