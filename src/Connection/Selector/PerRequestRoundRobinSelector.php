@@ -1,7 +1,7 @@
 <?php namespace Quince\Pelastic\Connection\Selector;
 
 use Illuminate\Contracts\Connection\HttpConnectionInterface;
-use Illuminate\Contracts\Connection\Selector\SelectorInterface;
+use Quince\Pelastic\Contracts\Connection\Selector\SelectorInterface;
 
 class PerRequestRoundRobinSelector extends Selector implements SelectorInterface {
 
