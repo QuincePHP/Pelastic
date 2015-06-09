@@ -40,9 +40,18 @@ class PelasticManager {
 
         if (null === (static::$instance)) {
             static::$instance = new static();
+            static::$instance->bootstrap();
         }
 
         return static::$instance;
+    }
+
+    /**
+     * Bootstrap needed things
+     */
+    protected function bootstrap()
+    {
+        // Do some jobs like initializing connection pool and so on.
     }
 
     /**
