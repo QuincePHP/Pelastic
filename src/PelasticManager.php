@@ -28,6 +28,11 @@ class PelasticManager {
     protected function __clone() {}
 
     /**
+     * Prevent new 
+     */
+    protected function __construct() {}
+
+    /**
      * Get singleton instance of the class
      *
      * @return PelasticManager
