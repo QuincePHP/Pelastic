@@ -31,6 +31,7 @@ interface FilteredQueryInterface extends QueryInterface{
      * Set filter section of the filtered query
      *
      * @param FilterInterface $filter
+     * @return $this
      */
     public function filter(FilterInterface $filter);
 

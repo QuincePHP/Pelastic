@@ -7,6 +7,21 @@ class TermFilter extends Filter implements TermFilterInterface {
     use FieldFilterableTrait;
 
     /**
+     * @param null $field
+     * @param null $value
+     */
+    public function __construct($field = null, $value = null)
+    {
+        if (null !== $field) {
+            $this->setField($field);
+        }
+
+        if (null !== $value) {
+            $this->setValue($value);
+        }
+    }
+
+    /**
      * An array representation of the object
      *
      * @return array

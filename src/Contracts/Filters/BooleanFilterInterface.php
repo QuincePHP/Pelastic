@@ -1,6 +1,6 @@
 <?php namespace Quince\Pelastic\Contracts\Filters;
 
-interface BooleanFilterInterface extends FilterInterface {
+interface BooleanFilterInterface extends FilterInterface, FilterCacheableInterface {
 
     /**
      * The filter should match the given query in a boolean or way
@@ -148,32 +148,4 @@ interface BooleanFilterInterface extends FilterInterface {
      */
     public function removeMustNots();
 
-    /**
-     * Set cache
-     *
-     * @param (bool) $bool
-     * @return $this
-     */
-    public function setCache($bool);
-
-    /**
-     * Cache status
-     *
-     * @return bool
-     */
-    public function getCacheStatus();
-
-    /**
-     * Enable cache on query
-     *
-     * @return $this
-     */
-    public function enableCache();
-
-    /**
-     * Disable cache
-     *
-     * @return $this
-     */
-    public function disableCache();
 }

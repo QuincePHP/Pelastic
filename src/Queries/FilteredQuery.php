@@ -117,10 +117,13 @@ class FilteredQuery extends Query implements FilteredQueryInterface, FilteredQue
      * Set filter section of the filtered query
      *
      * @param FilterInterface $filter
+     * @return $this
      */
     public function filter(FilterInterface $filter)
     {
         $this->setAttribute('filter', $filter);
+
+        return $this;
     }
 
     /**
