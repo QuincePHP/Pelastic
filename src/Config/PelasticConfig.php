@@ -1,6 +1,6 @@
 <?php namespace Quince\Pelastic\Config;
 
-use Illuminate\Contracts\Config\PelasticConfigInterface;
+use Quince\Pelastic\Contracts\Config\PelasticConfigInterface;
 use Quince\Pelastic\Exceptions\PelasticInvalidArgumentException;
 
 class PelasticConfig implements  PelasticConfigInterface {
@@ -137,7 +137,7 @@ class PelasticConfig implements  PelasticConfigInterface {
      */
     public function getConnectionPoolStrategy()
     {
-        return array_get($this->config, 'selector', $this->getDefaultConnectionPoolStrategy());
+        return array_get($this->config, 'pool_strategy', $this->getDefaultConnectionPoolStrategy());
     }
 
     /**
