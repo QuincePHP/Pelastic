@@ -1,9 +1,9 @@
-<?php namespace Quince\Pelastic\Api\Document;
+<?php namespace Quince\Pelastic\Api\Endpoints\Document\Index;
 
 use Quince\Pelastic\Api\Response;
 use Quince\Pelastic\Contracts\Api\Document\Index\IndexResponseInterface;
-use Quince\Pelastic\Contracts\Api\ResponseInterface;
-use Quince\Pelastic\Contracts\RawResponseInterface;
+use Quince\Pelastic\Contracts\Api\Response\RawResponseInterface;
+use Quince\Pelastic\Contracts\Api\Response\ResponseInterface;
 
 class IndexResponse extends Response implements IndexResponseInterface {
 
