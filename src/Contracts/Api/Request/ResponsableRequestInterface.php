@@ -1,6 +1,7 @@
 <?php namespace Quince\Pelastic\Contracts\Api\Request;
 
 use Elasticsearch\Client;
+use Quince\Pelastic\Contracts\Api\Response\ResponseInterface;
 
 interface ResponsableRequestInterface {
 
