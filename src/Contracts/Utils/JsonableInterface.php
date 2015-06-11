@@ -5,7 +5,7 @@ interface JsonableInterface {
     /**
      * An json representation of object
      *
-     * @return json
+     * @return string
      */
     public function toJson();
 
