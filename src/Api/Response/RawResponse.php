@@ -3,6 +3,7 @@
 use Quince\Pelastic\Contracts\Api\Response\RawResponseInterface;
 
 class RawResponse implements \ArrayAccess, RawResponseInterface {
+
     /**
      * Response array
      *
@@ -90,5 +91,19 @@ class RawResponse implements \ArrayAccess, RawResponseInterface {
     public function offsetUnset($offset)
     {
         unset($this->array[$offset]);
+    }
+
+    /**
+     * Build
+     *
+     * @param array $data
+     * @return $this
+     */
+    public static function build(array &$data)
+    {
+        $object = new static;
+        $object->setArray($data);
+
+        return $object;
     }
 }
