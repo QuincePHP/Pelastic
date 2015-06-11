@@ -47,15 +47,14 @@ class QueryBuilder implements QueryBuilderInterface {
 
     /**
      * Constructor of the class
-     * @param PelasticManager $manager
+     *
      * @param BooleanFilterInterface $boolFilter
      * @param BooleanQueryInterface $boolQuery
      */
-    public function __construct(PelasticManager $manager = null, BooleanFilterInterface $boolFilter = null, BooleanQueryInterface $boolQuery = null)
+    public function __construct(BooleanFilterInterface $boolFilter = null, BooleanQueryInterface $boolQuery = null)
     {
         $this->boolFilter = $boolFilter ?: new BooleanFilter;
         $this->boolQuery = $boolQuery ?: new BooleanQuery;
-        $this->manager= $manager ?: PelasticManager::getInstance();
     }
 
     /**
