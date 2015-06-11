@@ -2,6 +2,7 @@
 
 use Quince\Pelastic\Contracts\Utils\ArrayableInterface;
 use Quince\Pelastic\Contracts\Utils\JsonableInterface;
+use Quince\Pelastic\Document;
 
 interface DocumentInterface extends ArrayableInterface, JsonableInterface {
 
@@ -13,11 +14,28 @@ interface DocumentInterface extends ArrayableInterface, JsonableInterface {
     public function getId();
 
     /**
-     * Set id attrobute
+     * Set id attribute
      *
      * @param $id
      * @return $this
      */
     public function setId($id);
 
+    /**
+     * Create a new instance of document class
+     *
+     * @param array $attributes
+     * @param null $id
+     * @return static
+     */
+    public function newInstance(array $attributes = null, $id = null);
+
+    /**
+     * Create from attributes
+     *
+     * @param array $attributes
+     * @param null $id
+     * @return $this
+     */
+    public function create(array $attributes, $id = null);
 }
