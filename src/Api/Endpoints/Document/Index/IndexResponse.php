@@ -1,7 +1,7 @@
 <?php namespace Quince\Pelastic\Api\Endpoints\Document\Index;
 
-use Quince\Pelastic\Api\Response;
-use Quince\Pelastic\Contracts\Api\Document\Index\IndexResponseInterface;
+use Quince\Pelastic\Api\Response\Response;
+use Quince\Pelastic\Contracts\Api\Endpoints\Document\Index\IndexResponseInterface;
 use Quince\Pelastic\Contracts\Api\Response\RawResponseInterface;
 use Quince\Pelastic\Contracts\Api\Response\ResponseInterface;
 
@@ -21,6 +21,8 @@ class IndexResponse extends Response implements IndexResponseInterface {
     public function build(RawResponseInterface $raw)
     {
         $this->raw = $raw;
+
+        return $this;
     }
 
     /**
@@ -81,5 +83,15 @@ class IndexResponse extends Response implements IndexResponseInterface {
     public function getVersion()
     {
         return $this->raw['_version'];
+    }
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->raw->getArray();
     }
 }
