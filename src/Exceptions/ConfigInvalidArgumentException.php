@@ -1,5 +1,7 @@
 <?php namespace Quince\Pelastic\Exceptions;
 
-class ConfigInvalidArgumentException extends PelasticInvalidArgumentException {
+use Quince\Pelastic\Contracts\Exceptions\PelasticExceptionInterface;
+
+class ConfigInvalidArgumentException extends PelasticInvalidArgumentException implements PelasticExceptionInterface {
 
 }
