@@ -61,7 +61,11 @@ class IndexRequest extends Request implements IndexRequestInterface {
 
         $rawResult = RawResponse::build($client->index($this->toElasticClient()));
 
-        return $response->build($rawResult);
+        $response = $response->build($rawResult);
+
+        $this->getDocument()->setId($response->id());
+
+        return $response;
     }
 
     /**
