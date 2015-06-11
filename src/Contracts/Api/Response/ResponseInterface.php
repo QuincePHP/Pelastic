@@ -1,7 +1,5 @@
 <?php namespace Quince\Pelastic\Contracts\Api\Response;
 
-use Quince\Pelastic\Contracts\RawResponseInterface;
-
 interface ResponseInterface {
 
     /**
