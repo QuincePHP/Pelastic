@@ -1,4 +1,4 @@
-<?php namespace Quince\Pelastic\Contracts;
+<?php namespace Quince\Pelastic\Contracts\Factories;
 
 interface FilterFactoryInterface extends FactoryInterface {
 

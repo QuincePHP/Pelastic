@@ -1,6 +1,6 @@
-<?php namespace Quince\Pelastic\Contracts\Api;
+<?php namespace Quince\Pelastic\Contracts\Api\Request;
 
-use Quince\Pelastic\AccessibleMutatableTrait;
+use Quince\Pelastic\Utils\AccessibleMutatableTrait;
 
 class Http {
 

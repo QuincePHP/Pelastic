@@ -1,8 +1,10 @@
 <?php namespace Quince\Pelastic\Api\Document;
 
+use Elasticsearch\Client;
 use Quince\Pelastic\Api\Request;
 use Quince\Pelastic\Contracts\Api\Document\Index\IndexRequestInterface;
 use Quince\Pelastic\Contracts\Api\Http;
+use Quince\Pelastic\Contracts\Api\ResponseInterface;
 use Quince\Pelastic\Contracts\DocumentInterface;
 
 class IndexRequest extends Request implements IndexRequestInterface {
@@ -144,5 +146,44 @@ class IndexRequest extends Request implements IndexRequestInterface {
         $body = $this->getDocument()->toArray();
 
         return new Http('PUT', $uri, null, $body);
+    }
+
+    /**
+     * Convert request to an elasticsearch client representation
+     *
+     * @return array
+     */
+    public function toElasticClient()
+    {
+        if (null !== $this->getDocumentId()) {
+            $params['id'] = $this->getDocumentId();
+        }
+
+        if (null !== $this->getType()) {
+            $params['type'] = $this->getType();
+        }
+
+        $params['index'] = $this->getDocument()->toArray();
+
+        return $params;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponseClassOfRequest()
+    {
+        // TODO: Implement getResponseClassOfRequest() method.
+    }
+
+    /**
+     * Execute the request by elasticsearch client
+     *
+     * @param Client $client
+     * @return ResponseInterface
+     */
+    public function executeByElasticClient(Client $client)
+    {
+        // TODO: Implement executeByElasticClient() method.
     }
 }

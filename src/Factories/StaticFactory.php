@@ -1,6 +1,6 @@
-<?php namespace Quince\Pelastic;
+<?php namespace Quince\Pelastic\Factories;
 
-use Quince\Pelastic\Contracts\StaticFactoryInterface;
+use Quince\Pelastic\Contracts\Factories\StaticFactoryInterface;
 use Quince\Pelastic\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Exceptions\PelasticLogicException;
 use Stringy\StaticStringy;

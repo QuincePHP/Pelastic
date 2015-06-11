@@ -1,9 +1,9 @@
-<?php namespace Quince\Pelastic\Contracts\Api\Document\Index;
+<?php namespace Quince\Pelastic\Contracts\Api\Endpoints\Document\Index;
 
-use Quince\Pelastic\Contracts\Api\RequestInterface;
+use Quince\Pelastic\Contracts\Api\Request\RequestInterface;
 use Quince\Pelastic\Contracts\DocumentInterface;
 
-interface IndexRequestInterface extends  RequestInterface {
+interface IndexRequestInterface extends RequestInterface {
 
     /**
      * Set document to work on

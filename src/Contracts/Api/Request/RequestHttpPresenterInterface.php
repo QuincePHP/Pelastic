@@ -1,4 +1,4 @@
-<?php namespace Quince\Pelastic\Contracts\Api;
+<?php namespace Quince\Pelastic\Contracts\Api\Request;
 
 interface RequestHttpPresenterInterface {
 

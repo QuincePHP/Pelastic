@@ -1,4 +1,4 @@
-<?php namespace Quince\Pelastic\Contracts;
+<?php namespace Quince\Pelastic\Contracts\Factories;
 
 use Quince\Pelastic\Contracts\Filters\FilterInterface;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;

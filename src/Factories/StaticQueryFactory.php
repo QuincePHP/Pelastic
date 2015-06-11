@@ -1,8 +1,8 @@
-<?php namespace Quince\Pelastic;
+<?php namespace Quince\Pelastic\Factories;
 
+use Quince\Pelastic\Contracts\Factories\StaticQueryFactoryInterface;
 use Quince\Pelastic\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
-use Quince\Pelastic\Contracts\StaticQueryFactoryInterface;
 
 class StaticQueryFactory extends StaticFactory implements StaticQueryFactoryInterface {
 

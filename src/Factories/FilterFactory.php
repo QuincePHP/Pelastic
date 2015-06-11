@@ -1,6 +1,6 @@
-<?php namespace Quince\Pelastic;
+<?php namespace Quince\Pelastic\Factories;
 
-use Quince\Pelastic\Contracts\FilterFactoryInterface;
+use Quince\Pelastic\Contracts\Factories\FilterFactoryInterface;
 use Quince\Pelastic\Contracts\Queries\QueryInterface;
 
 class FilterFactory implements FilterFactoryInterface {
