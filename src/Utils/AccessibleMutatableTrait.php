@@ -1,5 +1,6 @@
 <?php namespace Quince\Pelastic\Utils;
 
+use Quince\Pelastic\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Exceptions\PelasticLogicException;
 
 trait AccessibleMutatableTrait {
@@ -111,26 +112,39 @@ trait AccessibleMutatableTrait {
      * to the old one
      *
      * @param string $field
-     * @param mixed  $what
+     * @param mixed $what
+     * @param null $key
      * @return array
      */
-    protected function putIntoArrayField($field, $what)
+    protected function putIntoArrayField($field, $what, $key = null)
     {
-        try {
+        $collection = $this->getAttribute($field, false, []);
 
-            $collection = (array) $this->getAttribute($field, true);
-
-            $collection = array_push($collection, $what);
-
-            $this->setAttribute($field, $collection);
-
-        } catch (PelasticLogicException $e) {
-            // In case array has not been created yet
-            $this->setAttribute($field, $collection = [$what]);
-
+        if (!is_array($collection)) {
+            throw new PelasticInvalidArgumentException("You can not treat a non-array as array");
         }
+
+        if ($key !== null) {
+            $collection[$key] = $what;
+        }else {
+            $collection = array_push($collection, $what);
+        }
+
+        $this->setAttribute($field, $collection);
 
         return $collection;
     }
 
+    /**
+     * Put into associative array
+     *
+     * @param $field
+     * @param $key
+     * @param $value
+     * @return array
+     */
+    protected function putIntoAssociativeArrayField($field, $key, $value)
+    {
+        return $this->putIntoArrayField($field, $value, $key);
+    }
 }
