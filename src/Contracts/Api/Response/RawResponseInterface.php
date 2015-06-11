@@ -16,4 +16,12 @@ interface RawResponseInterface {
      * @return array
      */
     public function getArray();
+
+    /**
+     * Build
+     *
+     * @param array $data
+     * @return $this
+     */
+    public static function build(array &$data);
 }
