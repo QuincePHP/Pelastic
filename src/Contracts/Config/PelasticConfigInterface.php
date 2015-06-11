@@ -8,6 +8,12 @@ interface PelasticConfigInterface {
      * @param array $params
      * @return $this
      */
-    public function fromArray(array $params);
+    public function setClientConfig(array $params);
 
+    /**
+     * Get client config
+     *
+     * @return array
+     */
+    public function getClientConfig();
 }
