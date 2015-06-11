@@ -1,10 +1,10 @@
 <?php namespace Quince\Pelastic\Api\Endpoints\Document\Index;
 
 use Elasticsearch\Client;
-use Quince\Pelastic\Api\RawResponse;
+use Quince\Pelastic\Api\Response\RawResponse;
 use Quince\Pelastic\Api\Request\Request;
-use Quince\Pelastic\Contracts\Api\Document\Index\IndexResponseInterface;
 use Quince\Pelastic\Contracts\Api\Endpoints\Document\Index\IndexRequestInterface;
+use Quince\Pelastic\Contracts\Api\Endpoints\Document\Index\IndexResponseInterface;
 use Quince\Pelastic\Contracts\Api\Response\ResponseInterface;
 use Quince\Pelastic\Contracts\DocumentInterface;
 
@@ -289,6 +289,8 @@ class IndexRequest extends Request implements IndexRequestInterface {
 
         if (null !== $id) {
             $this->setDocumentId($id);
+        }elseif (null !== ($id = $document->getId())) {
+            $this->setDocumentId($id);
         }
 
         return $this;
@@ -324,7 +326,7 @@ class IndexRequest extends Request implements IndexRequestInterface {
      */
     public function getDocumentId()
     {
-        return $this->getAttribute('document_id', false, null);
+        return $this->getAttribute('document_id', false, $this->getDocument()->getId());
     }
 
     /**
