@@ -1,6 +1,8 @@
 <?php namespace Quince\Pelastic\Contracts\Api\Response;
 
-interface ResponseInterface {
+use Illuminate\Contracts\Support\Arrayable;
+
+interface ResponseInterface extends Arrayable {
 
     /**
      * Build from raw array
