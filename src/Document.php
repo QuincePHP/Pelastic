@@ -5,20 +5,46 @@ use Quince\Pelastic\Utils\AccessibleMutatableTrait;
 
 class Document implements DocumentInterface, \ArrayAccess {
 
+    /**
+     * Document meta data
+     *
+     * @var array
+     */
+    protected $metaData = [];
+
     use AccessibleMutatableTrait {
         offsetSet as traitOffsetSet;
     }
-
-    /**
-     * @var string
-     */
-    protected $id;
 
     /**
      * @param array $attributes
      * @param null $id
      */
     public function __construct(array $attributes = null, $id = null)
+    {
+        $this->create($attributes, $id);
+    }
+
+    /**
+     * Create a new instance of document class
+     *
+     * @param array $attributes
+     * @param null $id
+     * @return static
+     */
+    public function newInstance(array $attributes = null, $id = null)
+    {
+        return new static($attributes, $id);
+    }
+
+    /**
+     * Create from attributes
+     *
+     * @param array $attributes
+     * @param null $id
+     * @return $this
+     */
+    public function create(array $attributes, $id = null)
     {
         foreach($attributes as $attribute => $attributeValue) {
             $this[$attribute] = $attributeValue;
@@ -27,6 +53,8 @@ class Document implements DocumentInterface, \ArrayAccess {
         if (null !== $id) {
             $this->setId($id);
         }
+
+        return $this;
     }
 
     /**
@@ -36,7 +64,7 @@ class Document implements DocumentInterface, \ArrayAccess {
      */
     public function toArray()
     {
-        return $this->getOptionAttribute();
+        return $this->getOptionAttribute() + ['id' => $this->getId()];
     }
 
     /**
