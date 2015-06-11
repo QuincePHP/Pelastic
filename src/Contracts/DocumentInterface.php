@@ -12,4 +12,12 @@ interface DocumentInterface extends ArrayableInterface, JsonableInterface {
      */
     public function getId();
 
+    /**
+     * Set id attrobute
+     *
+     * @param $id
+     * @return $this
+     */
+    public function setId($id);
+
 }
