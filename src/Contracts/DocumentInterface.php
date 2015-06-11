@@ -1,6 +1,9 @@
 <?php namespace Quince\Pelastic\Contracts;
 
-interface DocumentInterface extends ArrayableInterface, JsonableInterface{
+use Quince\Pelastic\Contracts\Utils\ArrayableInterface;
+use Quince\Pelastic\Contracts\Utils\JsonableInterface;
+
+interface DocumentInterface extends ArrayableInterface, JsonableInterface {
 
     /**
      * Unique identifier of the document
