@@ -6,7 +6,140 @@ use Quince\Pelastic\Contracts\DocumentInterface;
 interface IndexRequestInterface extends RequestInterface {
 
     /**
-     * Set document to work on
+     * Set index
+     *
+     * @param $index
+     * @return $this
+     */
+    public function setIndex($index);
+
+    /**
+     * Get index
+     *
+     * @return string
+     */
+    public function getIndex();
+
+    /**
+     * Set type
+     *
+     * @param $type
+     * @return $this
+     */
+    public function setType($type);
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType();
+
+    /**
+     * Set params array
+     *
+     * @param array $params
+     * @return $this
+     */
+    public function setParams(array $params);
+
+    /**
+     * Get params array
+     *
+     * @return array
+     */
+    public function getParams();
+
+    /**
+     * Set version of the document
+     *
+     * @param $version
+     * @return integer
+     */
+    public function setVersion($version);
+
+    /**
+     * Set operation type of the document
+     *
+     * @param $opType
+     * @return $this
+     */
+    public function setOpType($opType);
+
+    /**
+     * Set parent
+     *
+     * @param $parent
+     * @return $this
+     */
+    public function setParent($parent);
+
+    /**
+     * Set version type
+     *
+     * @param $type
+     * @return $this
+     */
+    public function setVersionType($type);
+
+    /**
+     * Set consistency
+     *
+     * @param $consistency
+     * @return $this
+     */
+    public function setConsistency($consistency);
+
+    /**
+     * Set refresh
+     *
+     * @param $refresh
+     * @return $this
+     */
+    public function setRefresh($refresh);
+
+    /**
+     * Set timeout
+     *
+     * @param $timeout
+     * @return $this
+     */
+    public function setTimeout($timeout);
+
+    /**
+     * Set routing
+     *
+     * @param $routing
+     * @return $this
+     */
+    public function setRouting($routing);
+
+    /**
+     * Set replication
+     *
+     * @param $replication
+     * @return $this
+     */
+    public function setReplication($replication);
+
+    /**
+     * Set ttl
+     *
+     * @param $ttl
+     * @return $this
+     */
+    public function setTTL($ttl);
+
+    /**
+     * Set timestamp
+     *
+     * @param integer $timestamp
+     * @return $this
+     */
+    public function setTimestamp($timestamp);
+
+    /**
+     * Set document
      *
      * @param DocumentInterface $document
      * @param null $id
@@ -15,65 +148,37 @@ interface IndexRequestInterface extends RequestInterface {
     public function setDocument(DocumentInterface $document, $id = null);
 
     /**
-     * Set id
-     *
-     * @param $id
-     * @return $this
-     */
-    public function setId($id);
-
-    /**
-     * Index to store document on
-     *
-     * @param $index
-     * @return $this
-     */
-    public function setIndex($index);
-
-    /**
-     * Type to set document on
-     *
-     * @param $type
-     * @return $this
-     */
-    public function setType($type);
-
-    /**
-     * Index with all args
-     *
-     * @param DocumentInterface $document
-     * @param $index
-     * @param null $type
-     * @param null $id
-     * @return mixed
-     */
-    public function index(DocumentInterface $document, $index, $type = null, $id = null);
-
-    /**
-     * Get document of the request
+     * Get document
      *
      * @return DocumentInterface
      */
     public function getDocument();
 
     /**
-     * Get id of the document
+     * Set document id
      *
-     * @return string|integer
+     * @param $id
+     * @return $this
+     */
+    public function setDocumentId($id);
+
+    /**
+     * Get document ID
+     *
+     * @return mixed|null
      */
     public function getDocumentId();
 
     /**
-     * Get index that should be used to store documents on.
+     * Make with all attributes
      *
-     * @return string
+     * @param $index
+     * @param null $type
+     * @param DocumentInterface $document
+     * @param null $id
+     * @param array $params
+     * @return $this
      */
-    public function getIndex();
+    public function make($index, $type = null, DocumentInterface $document, $id = null, array $params);
 
-    /**
-     * Get type that should be used to store documents on.
-     *
-     * @return string
-     */
-    public function getType();
 }
