@@ -1,8 +1,8 @@
-<?php namespace Quince\Pelastic\Api\Document;
+<?php namespace Quince\Pelastic\Api\Endpoints\Document\Index;
 
 use Elasticsearch\Client;
 use Quince\Pelastic\Api\RawResponse;
-use Quince\Pelastic\Api\Request;
+use Quince\Pelastic\Api\Request\Request;
 use Quince\Pelastic\Contracts\Api\Document\Index\IndexResponseInterface;
 use Quince\Pelastic\Contracts\Api\Endpoints\Document\Index\IndexRequestInterface;
 use Quince\Pelastic\Contracts\Api\Response\ResponseInterface;
