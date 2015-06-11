@@ -71,4 +71,14 @@ abstract class Response implements ResponseInterface, \ArrayAccess {
     {
         unset($this->raw[$offset]);
     }
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->raw;
+    }
 }
