@@ -28,9 +28,13 @@ class GetResponse extends Response {
         $source = $this->raw['_source'];
 
         if (null === ($document = $this->getDocument())) {
-            $this->document = new Document($source, $metaData['_id']);
+
+            $this->document = new Document($source, $metaData['_id'], $metaData);
+
         }else {
-            $this->document->create($source, $metaData['_id']);
+
+            $this->document->create($source, $metaData['_id'], $metaData);
+
         }
 
         return $this;
