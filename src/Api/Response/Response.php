@@ -79,6 +79,6 @@ abstract class Response implements ResponseInterface, \ArrayAccess {
      */
     public function toArray()
     {
-        return $this->raw;
+        return $this->raw->getArray();
     }
 }
