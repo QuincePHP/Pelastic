@@ -3,9 +3,17 @@
 use Quince\Pelastic\Exceptions\PelasticInvalidArgumentException;
 use Quince\Pelastic\Exceptions\PelasticLogicException;
 
+/**
+ * Trait AccessibleMutatableTrait
+ *
+ * @property $optionAttribute
+ * @package Quince\Pelastic\Utils
+ */
 trait AccessibleMutatableTrait {
 
     /**
+     * Attribute container
+     *
      * @var array
      */
     protected $optionAttribute = [];
@@ -146,5 +154,17 @@ trait AccessibleMutatableTrait {
     protected function putIntoAssociativeArrayField($field, $key, $value)
     {
         return $this->putIntoArrayField($field, $value, $key);
+    }
+
+    /**
+     * Make option attribute container empty
+     *
+     * @return $this
+     */
+    protected function emptyOptionAttribute()
+    {
+        $this->optionAttribute = [];
+
+        return $this;
     }
 }
