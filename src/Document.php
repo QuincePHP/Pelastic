@@ -5,6 +5,22 @@ use Quince\Pelastic\Utils\AccessibleMutatableTrait;
 
 class Document implements DocumentInterface, \ArrayAccess {
 
+    use AccessibleMutatableTrait;
+
+    /**
+     * ID field name
+     *
+     * @var string
+     */
+    const ID_FIELD = '_id';
+
+    /**
+     * Meta data field name
+     *
+     * @var string
+     */
+    const META_DATA_FIELD = '_meta_data';
+
     /**
      * Document meta data
      *
@@ -12,17 +28,14 @@ class Document implements DocumentInterface, \ArrayAccess {
      */
     protected $metaData = [];
 
-    use AccessibleMutatableTrait {
-        offsetSet as traitOffsetSet;
-    }
-
     /**
      * @param array $attributes
      * @param null $id
+     * @param null $metaData
      */
-    public function __construct(array $attributes = null, $id = null)
+    public function __construct(array $attributes = null, $id = null, $metaData = null)
     {
-        $this->create($attributes, $id);
+        $this->create($attributes, $id, $metaData);
     }
 
     /**
@@ -30,11 +43,12 @@ class Document implements DocumentInterface, \ArrayAccess {
      *
      * @param array $attributes
      * @param null $id
+     * @param null $metaData
      * @return static
      */
-    public function newInstance(array $attributes = null, $id = null)
+    public function newInstance(array $attributes = null, $id = null, $metaData = null)
     {
-        return new static($attributes, $id);
+        return new static($attributes, $id, $metaData);
     }
 
     /**
@@ -42,12 +56,19 @@ class Document implements DocumentInterface, \ArrayAccess {
      *
      * @param array $attributes
      * @param null $id
+     * @param null $metaData
      * @return $this
      */
-    public function create(array $attributes, $id = null)
+    public function create(array $attributes, $id = null, $metaData = null)
     {
-        foreach($attributes as $attribute => $attributeValue) {
+        $this->emptyOptionAttribute();
+
+        foreach ($attributes as $attribute => $attributeValue) {
             $this[$attribute] = $attributeValue;
+        }
+
+        if (null !== $metaData) {
+            $this->setDocumentMetaData($metaData);
         }
 
         if (null !== $id) {
@@ -60,11 +81,23 @@ class Document implements DocumentInterface, \ArrayAccess {
     /**
      * An array representation of object
      *
+     * @param bool $mergeId
+     * @param bool $includeMetaData
      * @return array
      */
-    public function toArray()
+    public function toArray($mergeId = false, $includeMetaData = false)
     {
-        return $this->getOptionAttribute() + ['id' => $this->getId()];
+        $data = $this->getOptionAttribute();
+
+        if ($includeMetaData) {
+            $data[static::META_DATA_FIELD] = $this->getDocumentMetaData();
+        }
+
+        if ($mergeId && $this->getId() !== null) {
+            $data[static::ID_FIELD] = $this->getId();
+        }
+
+        return $data;
     }
 
     /**
@@ -74,17 +107,19 @@ class Document implements DocumentInterface, \ArrayAccess {
      */
     public function getId()
     {
-        return $this->id;
+        return $this->getMetaDataAttribute(static::ID_FIELD);
     }
 
     /**
      * An json representation of object
      *
+     * @param int $options
+     * @param int $depth
      * @return string
      */
-    public function toJson()
+    public function toJson($options = 0, $depth = 512)
     {
-
+        return json_encode($this->toArray(), $options, $depth);
     }
 
     /**
@@ -95,21 +130,80 @@ class Document implements DocumentInterface, \ArrayAccess {
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->setMetaDataAttribute(static::ID_FIELD, $id);
+
+        return $this;
     }
 
     /**
-     * Change if setting id
+     * Set magic method
      *
-     * @param $offset
+     * @param $attribute
      * @param $value
+     * @return void
      */
-    public function offsetSet($offset, $value)
+    public function __set($attribute, $value)
     {
-        if ($offset === 'id') {
-           $this->setId($value); return;
-        }
+        $this->setAttribute($attribute, $value);
+    }
 
-        $this->traitOffsetSet($offset, $value);
+    /**
+     * Get magic method
+     *
+     * @param $attribute
+     * @return mixed
+     */
+    public function __get($attribute)
+    {
+        return $this->getAttribute($attribute, false, null);
+    }
+
+    /**
+     * Get document meta data
+     *
+     * @return array
+     */
+    public function getDocumentMetaData()
+    {
+        return $this->metaData;
+    }
+
+    /**
+     * Set document meta data
+     *
+     * @param array $metaData
+     * @return $this
+     */
+    public function setDocumentMetaData(array $metaData = [])
+    {
+        $this->metaData = $metaData;
+
+        return $this;
+    }
+
+    /**
+     * Get meta data attribute
+     *
+     * @param $attribute
+     * @param null $defaultValue
+     * @return string
+     */
+    public function getMetaDataAttribute($attribute, $defaultValue = null)
+    {
+        return array_get($this->getDocumentMetaData(), $attribute, $defaultValue);
+    }
+
+    /**
+     * Set meta data attribute
+     *
+     * @param $attribute
+     * @param $value
+     * @return $this
+     */
+    public function setMetaDataAttribute($attribute, $value)
+    {
+        $this->metaData[$attribute] = $value;
+
+        return $this;
     }
 }
