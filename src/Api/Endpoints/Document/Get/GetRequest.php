@@ -4,6 +4,7 @@ use Elasticsearch\Client;
 use Quince\Pelastic\Api\Request\Request;
 use Quince\Pelastic\Api\Response\RawResponse;
 use Quince\Pelastic\Contracts\Api\Endpoints\Document\Get\GetRequestInterface;
+use Quince\Pelastic\Contracts\Api\Endpoints\Document\Get\GetResponseInterface;
 use Quince\Pelastic\Contracts\Api\Response\ResponseInterface;
 use Quince\Pelastic\Contracts\DocumentInterface;
 use Quince\Pelastic\Exceptions\PelasticException;
@@ -47,15 +48,16 @@ class GetRequest extends Request implements GetRequestInterface {
         $params = $this->toElasticClient();
 
         $responseClass = $this->getResponseClassOfRequest();
-        $response = new GetResponse();
+        /** @var GetResponseInterface $response */
+        $response = new $responseClass();
 
         $result = RawResponse::build($client->get($params));
 
-        $response->build($result);
-
         if (null !== $this->document) {
-            $response->setDocument($document);
+            $response->setDocument($this->document);
         }
+
+        $response->build($result);
 
         return $response;
     }
@@ -267,7 +269,7 @@ class GetRequest extends Request implements GetRequestInterface {
     /**
      * Should add source or not
      *
-     * @param bool $source
+     * @param array $source
      * @return $this
      */
     public function setSource($source)
