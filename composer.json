@@ -32,7 +32,8 @@
 		"symfony/event-dispatcher": "2.*",
 		"pimple/pimple": "^3.0@dev",
 		"psr/log": "^1.0@dev",
-		"ruflin/elastica": "^2.1@dev"
+		"ruflin/elastica": "^2.1@dev",
+		"nesbot/carbon": "dev-master"
 	},
 	"require-dev": {
 		"codeception/codeception": "~2.0",
