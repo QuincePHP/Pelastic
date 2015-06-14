@@ -208,6 +208,17 @@ abstract class Pelastic implements ArrayableInterface, JsonableInterface, \Array
     protected $shouldRemoveIdFromAttributes = false;
 
     /**
+     * Method black list for mutator
+     *
+     * @var array
+     */
+    protected $mutatorMethodBlacklist = [
+        'getOptionAttribute',
+        'getMutatorMethodForAttribute',
+        'getGetterMethodForAttribute'
+    ];
+
+    /**
      * @param array $attributes
      * @param null $id
      */
@@ -816,7 +827,7 @@ abstract class Pelastic implements ArrayableInterface, JsonableInterface, \Array
 
             if(array_key_exists($date, $values)) {
 
-                if (null !== $values[$date]) $values[$date] = (string) $this->asDateTime($date);
+                if (null !== $values[$date]) $values[$date] = (string) $this->asDateTime($values[$date]);
 
             }
 
@@ -924,17 +935,13 @@ abstract class Pelastic implements ArrayableInterface, JsonableInterface, \Array
 
         foreach (get_class_methods($class) as $method) {
 
+            if (in_array($method, $this->mutatorMethodBlacklist)) continue;
+
             if (
                 strpos($method, 'Attribute') !== false &&
                 preg_match('/^get(.+)Attribute$/', $method, $matches)
             ) {
-                $matches = lcfirst($matches[1]);
-
-                $method = $matches[1];
-
-                if (static::$snakeAttributes) {
-                    $matches[1] = snake_case($matches[1]);
-                }
+                if (static::$snakeAttributes) $matches[1] = lcfirst(snake_case($matches[1]));
 
                 $mutatedAttributes[$matches[1]] = $method;
             }
@@ -1198,7 +1205,7 @@ abstract class Pelastic implements ArrayableInterface, JsonableInterface, \Array
      * @return mixed
      * @throws PelasticException
      */
-    public function __callStatic($method, $args = [])
+    public static function __callStatic($method, $args = [])
     {
         // We will create an instance of current class for static calls.
         $current = new static();
@@ -1228,7 +1235,7 @@ abstract class Pelastic implements ArrayableInterface, JsonableInterface, \Array
      */
     protected function getArrayableItems(array $values)
     {
-        if (count($this->visible) > 0) {
+        if (count($this->visible) > 0 && $this->visible != ['*']) {
 
             return array_intersect_key($values, array_flip($this->visible));
 
