@@ -1,10 +1,12 @@
 <?php namespace Quince\Pelastic\SqlMonkey;
 
 use Elastica\Filter\BoolFilter;
+use Elastica\Filter\Term;
 use Elastica\Query\BoolQuery;
 use Elastica\Type;
 use Quince\Pelastic\Contracts\SqlMonkey\QueryBuilderInterface;
 use Quince\Pelastic\Exceptions\PelasticException;
+use Quince\Pelastic\Exceptions\PelasticInvalidArgumentException;
 
 class QueryBuilder implements QueryBuilderInterface {
 
@@ -36,6 +38,16 @@ class QueryBuilder implements QueryBuilderInterface {
         'like', 'not like', 'between', 'ilike',
         '&', '|', '^', '<<', '>>',
         'rlike', 'regexp', 'not regexp',
+    ];
+
+    /**
+     * Sql operator to method mapping
+     *
+     * @var array
+     */
+    protected $methodMapping = [
+        '=' => 'applyTermFilter',
+        'like' => 'applyWildCardQuery'
     ];
 
     /**
@@ -110,13 +122,66 @@ class QueryBuilder implements QueryBuilderInterface {
         // If the user has not given the operator
         // we will treat the second argument as the value
         // and guess that she wants "equals" operator
-        if (func_num_args() == 2) {
+        if (func_num_args() == 2) list($operator, $value) = ['=', $value];
 
-            list($operator, $value) = ['=', $value];
+        $method = $this->mapOperatorToMethod($operator);
+
+        $this->{$method}($field, $value);
+
+        return $this;
+    }
+
+    /**
+     * Generate a method name from an operator
+     *
+     * @param $operator
+     * @return string
+     */
+    protected function mapOperatorToMethod($operator)
+    {
+        if (!array_key_exists($operator, $this->operators)) {
+
+            throw new PelasticInvalidArgumentException(
+                "Invalid operator [$operator] set."
+            );
 
         }
 
+        return $this->methodMapping[$operator];
+    }
+
+    /**
+     * Apply term filter on the monkey
+     *
+     * @param $field
+     * @param $value
+     * @return $this
+     */
+    public function applyTermQuery($field, $value, $negative = false)
+    {
+        $termFilter = $this->getTermFilter()->setTerm($field, $value);
+
+        if ($value instanceof \Closure) {
+            $termFilter = $value($termFilter);
+        }
+
+        if ($negative === false) {
+            $this->getBoolFilter()->addMust($termFilter);
+        }else {
+            $this->getBoolFilter()->addMustNot($termFilter);
+        }
+
         return $this;
+    }
+
+    /**
+     * Get a new term filter instance
+     *
+     * @return Term
+     */
+    public function getTermFilter()
+    {
+        return new Term();
     }
 
     /**
