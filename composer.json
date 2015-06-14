@@ -27,13 +27,12 @@
 	},
 	"require": {
         "danielstjules/stringy": "~1.9",
-		"guzzlehttp/guzzle": "~5.3",
-        "elasticsearch/elasticsearch": "~2.0@beta",
 		"illuminate/support": "^5.0",
 		"monolog/monolog": "^1.13@dev",
 		"symfony/event-dispatcher": "2.*",
 		"pimple/pimple": "^3.0@dev",
-		"psr/log": "^1.0@dev"
+		"psr/log": "^1.0@dev",
+		"ruflin/elastica": "^2.1@dev"
 	},
 	"require-dev": {
 		"codeception/codeception": "~2.0",
