@@ -1,12 +1,10 @@
 <?php namespace Quince\Pelastic\SqlMonkey;
 
-use Quince\Pelastic\Contracts\Filters\BooleanFilterInterface;
-use Quince\Pelastic\Contracts\Queries\BooleanQueryInterface;
+use Elastica\Filter\BoolFilter;
+use Elastica\Query\BoolQuery;
+use Elastica\Type;
 use Quince\Pelastic\Contracts\SqlMonkey\QueryBuilderInterface;
 use Quince\Pelastic\Exceptions\PelasticException;
-use Quince\Pelastic\Filters\BooleanFilter;
-use Quince\Pelastic\PelasticManager;
-use Quince\Pelastic\Queries\BooleanQuery;
 
 class QueryBuilder implements QueryBuilderInterface {
 
@@ -17,21 +15,16 @@ class QueryBuilder implements QueryBuilderInterface {
      * need any score comparison and a query section which contains queries which
      * need scoring like a like query.
      *
-     * @var BooleanFilter
+     * @var BoolFilter
      */
     protected $boolFilter;
 
     /**
      * The boolean query part of the filtered query
      *
-     * @var BooleanQuery
+     * @var BoolQuery
      */
     protected $boolQuery;
-
-    /**
-     * @var PelasticManager
-     */
-    protected $manager;
 
     /**
      * All of the available clause operators.
@@ -46,15 +39,23 @@ class QueryBuilder implements QueryBuilderInterface {
     ];
 
     /**
-     * Constructor of the class
-     *
-     * @param BooleanFilterInterface $boolFilter
-     * @param BooleanQueryInterface $boolQuery
+     * @var Type
      */
-    public function __construct(BooleanFilterInterface $boolFilter = null, BooleanQueryInterface $boolQuery = null)
+    protected $type;
+
+    /**
+     * @param BoolFilter $boolFilter
+     * @param BoolQuery $boolQuery
+     * @param Type $type
+     */
+    public function __construct(BoolFilter $boolFilter = null, BoolQuery $boolQuery = null, Type $type = null)
     {
-        $this->boolFilter = $boolFilter ?: new BooleanFilter;
-        $this->boolQuery = $boolQuery ?: new BooleanQuery;
+        $this->setBoolFilter($boolFilter ?: new BoolFilter());
+        $this->setBoolQuery($boolQuery ?: new BoolQuery());
+
+        if (null !== $type) {
+            $this->setType($type);
+        }
     }
 
     /**
@@ -154,7 +155,7 @@ class QueryBuilder implements QueryBuilderInterface {
     /**
      * Get boolean filter
      *
-     * @return BooleanFilter
+     * @return BoolFilter
      */
     public function getBooleanFilter()
     {
@@ -164,7 +165,7 @@ class QueryBuilder implements QueryBuilderInterface {
     /**
      * Get boolean query
      *
-     * @return BooleanQuery
+     * @return BoolQuery
      */
     public function getBooleanQuery()
     {
@@ -205,5 +206,74 @@ class QueryBuilder implements QueryBuilderInterface {
         $this->applyNestedFromQuery($query, $bool);
 
         return $this;
+    }
+
+    /**
+     * Set boolean filter instance
+     *
+     * @param BoolFilter $boolFilter
+     * @return $this
+     */
+    public function setBoolFilter(BoolFilter $boolFilter)
+    {
+        $this->boolFilter = $boolFilter;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return Type
+     */
+    public function getType()
+    {
+
+    }
+
+    /**
+     * Set type instance
+     *
+     * @param Type $type
+     * @return $this
+     */
+    public function setType(Type $type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Set boolean query
+     *
+     * @param BoolQuery $boolQuery
+     * @return $this
+     */
+    public function setBoolQuery(BoolQuery $boolQuery)
+    {
+        $this->boolQuery = $boolQuery;
+
+        return $this;
+    }
+
+    /**
+     * Get boolean query instance
+     *
+     * @return BoolQuery
+     */
+    public function getBoolQuery()
+    {
+        return $this->boolQuery;
+    }
+
+    /**
+     * Get boolean filter instance
+     *
+     * @return BoolFilter $boolFilter
+     */
+    public function getBoolFilter()
+    {
+        return $this->boolFilter;
     }
 }
