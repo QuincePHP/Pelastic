@@ -1,11 +1,58 @@
 <?php namespace Quince\Pelastic\Contracts\SqlMonkey;
 
+use Elastica\Filter\BoolFilter;
+use Elastica\Query\BoolQuery;
+use Elastica\Query\Filtered;
+use Elastica\Type;
 use Quince\Pelastic\Exceptions\PelasticException;
-use Quince\Pelastic\Filters\BooleanFilter;
-use Quince\Pelastic\Queries\BooleanQuery;
 use Quince\Pelastic\SqlMonkey\QueryBuilder;
 
 interface QueryBuilderInterface {
+
+    /**
+     * Set boolean filter instance
+     *
+     * @param BoolFilter $boolFilter
+     * @return $this
+     */
+    public function setBoolFilter(BoolFilter $boolFilter);
+
+    /**
+     * Get type
+     *
+     * @return Type
+     */
+    public function getType();
+
+    /**
+     * Set type instance
+     *
+     * @param Type $type
+     * @return $this
+     */
+    public function setType(Type $type);
+
+    /**
+     * Get boolean filter instance
+     *
+     * @return BoolFilter $boolFilter
+     */
+    public function getBoolFilter();
+
+    /**
+     * Set boolean query
+     *
+     * @param BoolQuery $boolQuery
+     * @return $this
+     */
+    public function setBoolQuery(BoolQuery $boolQuery);
+
+    /**
+     * Get boolean query instance
+     *
+     * @return BoolQuery
+     */
+    public function getBoolQuery();
 
     /**
      * Get a clone of current object
@@ -45,14 +92,14 @@ interface QueryBuilderInterface {
     /**
      * Get boolean filter
      *
-     * @return BooleanFilter
+     * @return BoolFilter
      */
     public function getBooleanFilter();
 
     /**
      * Get boolean query
      *
-     * @return BooleanQuery
+     * @return BoolQuery
      */
     public function getBooleanQuery();
 
