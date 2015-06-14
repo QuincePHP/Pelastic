@@ -56,9 +56,7 @@ class ElasticaAdaptor {
      */
     public function find($id, $include = null)
     {
-        $index = static::$client->getIndex($this->getModel()->getIndex());
-
-        $type = new Type($index, $this->getModel()->getType());
+        $type = $this->getNewType();
 
         $document = $type->getDocument($id, ['_source' => $include]);
 
@@ -67,6 +65,26 @@ class ElasticaAdaptor {
         $this->getModel()->fill($document->getData());
 
         return $this->getModel();
+    }
+
+    /**
+     * Get new type instance
+     *
+     * @return Type
+     */
+    protected function getNewType()
+    {
+        return new Type($this->getNewIndex(), $this->getModel()->getType());
+    }
+
+    /**
+     * Get new index instance
+     *
+     * @return \Elastica\Index
+     */
+    protected function getNewIndex()
+    {
+        return static::$client->getIndex($this->getModel()->getIndex());
     }
 
 }
