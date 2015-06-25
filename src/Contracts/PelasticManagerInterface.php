@@ -10,7 +10,7 @@ interface PelasticManagerInterface {
      * @param Client $client
      * @return $this
      */
-    public function setElastisearchClient(Client $client);
+    public function setElasticsearchClient(Client $client);
 
     /**
      * Get elasticsearch client
