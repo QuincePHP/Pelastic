@@ -10,7 +10,12 @@ use Quince\Pelastic\Contracts\DocumentInterface;
 use Quince\Pelastic\Exceptions\PelasticException;
 use Quince\Pelastic\Exceptions\PelasticInvalidArgumentException;
 
-class GetRequest extends Request implements GetRequestInterface {
+/**
+ * Class GetRequest
+ * @package Quince\Pelastic\Api\Endpoints\Document\Get
+ */
+class GetRequest extends Request implements GetRequestInterface
+{
 
     /**
      * @var DocumentInterface
@@ -70,7 +75,7 @@ class GetRequest extends Request implements GetRequestInterface {
      */
     public function setId($id)
     {
-        $this->setAttribute('id', (string) $id);
+        $this->setAttribute('id', (string)$id);
 
         return $this;
     }
@@ -131,7 +136,7 @@ class GetRequest extends Request implements GetRequestInterface {
      */
     public function setVersion($version)
     {
-        $this->setAttribute('version', (string) $version);
+        $this->setAttribute('version', (string)$version);
     }
 
     /**
@@ -248,7 +253,7 @@ class GetRequest extends Request implements GetRequestInterface {
      */
     public function realtime($realtime)
     {
-        $this->setAttribute('realtime', (bool) $realtime);
+        $this->setAttribute('realtime', (bool)$realtime);
 
         return $this;
     }
@@ -341,4 +346,20 @@ class GetRequest extends Request implements GetRequestInterface {
 
         return $this;
     }
+
+
+    /**
+     * @param int $from
+     * @param int $size
+     * @return $this
+     */
+    public function paginate($from = 0, $size = 10)
+    {
+        $this->setAttribute('from', $from);
+        $this->setAttribute('size', $size);
+
+        return $this;
+
+    }
+
 }
