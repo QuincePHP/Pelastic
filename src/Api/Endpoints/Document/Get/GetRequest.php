@@ -357,6 +357,7 @@ class GetRequest extends Request implements GetRequestInterface
     {
         $this->setAttribute('from', $from);
         $this->setAttribute('size', $size);
+
         return $this;
 
     }
