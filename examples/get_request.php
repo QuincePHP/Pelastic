@@ -14,21 +14,21 @@ $manager = new PelasticManager($client);
 
 $indexRequest = new IndexRequest();
 $indexRequest->setIndex('users')
-             ->setType('common')
-             ->setDocument($document = new Document([
-                 'username' => 'pretty_john',
-                 'name' => 'John Snow',
-                 'nationality' => 'Winterfell'
-             ], 'persons1'));
+    ->setType('common')
+    ->setDocument($document = new Document([
+        'username' => 'pretty_john',
+        'name' => 'John Snow',
+        'nationality' => 'Winterfell'
+    ], 'persons1'));
 
 $result = $manager->executeRequest($indexRequest);
 $documentId = $document->getId();
 
 
 $getRequest = (new GetRequest())->setId($documentId)
-                                ->setIndex('users')
-                                ->setType('common')
-                                ->setSource(['username', 'name']);
+    ->setIndex('users')
+    ->setType('common')
+    ->setSource(['username', 'name']);
 
 /** @var \Quince\Pelastic\Contracts\Api\Endpoints\Document\Get\GetResponseInterface $result */
 $result = $manager->executeRequest($getRequest);
