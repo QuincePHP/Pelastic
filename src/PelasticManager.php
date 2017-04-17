@@ -5,7 +5,8 @@ use Quince\Pelastic\Contracts\Api\Request\RequestInterface;
 use Quince\Pelastic\Contracts\Api\Response\ResponseInterface;
 use Quince\Pelastic\Contracts\PelasticManagerInterface;
 
-class PelasticManager implements PelasticManagerInterface {
+class PelasticManager implements PelasticManagerInterface
+{
 
     /**
      * @var Client
@@ -17,13 +18,14 @@ class PelasticManager implements PelasticManagerInterface {
      */
     public function __construct(Client $client)
     {
-        $this->setElastisearchClient($client);
+        $this->setElasticsearchClient($client);
     }
 
     /**
      * Execute an enpoint request
      *
      * @param RequestInterface $request
+     *
      * @return ResponseInterface
      */
     public function executeRequest(RequestInterface $request)
@@ -35,11 +37,14 @@ class PelasticManager implements PelasticManagerInterface {
      * Set elasticsearch client on the manager
      *
      * @param Client $client
+     *
      * @return $this
      */
-    public function setElastisearchClient(Client $client)
+    public function setElasticsearchClient(Client $client)
     {
-        $this->client = $client; return $this;
+        $this->client = $client;
+
+        return $this;
     }
 
     /**
